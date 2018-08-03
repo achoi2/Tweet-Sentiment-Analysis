@@ -1,5 +1,5 @@
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
-var ctx = document.getElementById('watsonChart').getContext('2d');
+var context = document.querySelector('#watsonChart').getContext('2d');
 
 var data = {};
 data.text = "I hate you.";
@@ -15,12 +15,12 @@ $.ajax(
     }
     });
 
-var mixedChart = new Chart(ctx, {
+var mixedChart = new Chart(context, {
     type: 'bar',
     data: {
         datasets: [{
             label: 'Tone Score',
-            data: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+            data: [0, 0.1, 0.2, 0.3, 0.4, 1, 0.6],
             backgroundColor: 'rgb(65, 193, 244, 0.5)',
             borderColor: 'rgb(65, 193, 244, 0.5)'
             }, {
@@ -31,35 +31,46 @@ var mixedChart = new Chart(ctx, {
             fill: false,
             backgroundColor: 'rgb(244, 72, 66)',
             borderColor: 'rgb(244, 72, 66)',
-            pointRadius: 5,
-            // showLine: false
+            showLine: false
             }, {
             label: 'Target Approval Score',
             data: [0.4, 0.6, 0.5, 0.4, 0.3, 0.3, 0.6],
             type: 'line',
             fill: false, 
-            pointRadius: 5,
             backgroundColor: 'rgb(54, 216, 36)',
             borderColor: 'rgb(54, 216, 36)',
+            showLine: false,
             }, {
             label: 'Maximum Approval Score',
             data: [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
             type: 'line',
             fill: false,
-            pointRadius: 5,
-            // showLine: false
             backgroundColor: 'rgb(244, 72, 66)',
-            borderColor: 'rgb(244, 72, 66)'
+            borderColor: 'rgb(244, 72, 66)',
+            showLine: false,
             }],
         labels: ['Anger', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
     },
     options: {
         beginatZero: true, 
-        yAxes: [{
-            max: 1.0
-        }]
-        // scales: {
-
-        // }
+        scales: {
+            yAxes: [{
+                id: 'y-axis-1',
+                type: 'linear', 
+                position: 'left', 
+                ticks: {
+                    min: 0, 
+                    max: 1.1
+                },
+                gridLines: {
+                    display: false
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }]
+        }
     }
 });
