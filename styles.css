@@ -1,10 +1,11 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
@@ -13,10 +14,44 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1B95E0;
+    background-color: #1b95e0;
     height: 80px;
 }
 
 .header-text {
     color: white;
+}
+
+
+.form-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(232, 245, 253);
+    width: 635px;
+    height: 170px;
+    padding-top: 20px;
+}
+
+.form-container-img {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+
+.textarea {
+    width: 506px;
+    height: 100px;
+    border-color: #a4d9f9;
+}
+
+.submit-button {
+    background-color: rgb(74, 179, 244);
+    cursor: pointer;
+    color: white;
+    width: 75px;
+    height: 35px;
+    border-radius: 15px;
 }
