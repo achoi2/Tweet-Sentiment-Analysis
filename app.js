@@ -22,9 +22,9 @@ $.ajax(
     success: function(watsonData) {
         var toneObject = watsonData.document_tone.tones 
         for (var i = 0; i < toneObject.length; i++) {
-            watsonToneId = toneObject[i].tone_id
+            var watsonToneId = toneObject[i].tone_id
             for (var j = 0; j < toneArray.length; j++) {
-                toneName = toneArray[j]
+                var toneName = toneArray[j]
                 if (watsonToneId === toneName) {
                     toneChartObject[toneName] = toneObject[i].score;
                 }
