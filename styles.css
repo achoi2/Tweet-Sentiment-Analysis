@@ -22,7 +22,6 @@ header {
     color: white;
 }
 
-
 .form-container {
     margin: 0 auto;
     display: flex;
@@ -39,7 +38,6 @@ header {
     border-radius: 50%;
     margin-right: 15px;
 }
-
 
 .textarea {
     width: 506px;
