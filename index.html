@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,36 @@
     <link rel="stylesheet" href="styles.css">
     <title>Tonely</title>
 </head>
+
 <body>
     <header>
         <h1 class="header-text">Tonely</h1>
     </header>
     <div class="text-box">
-
+        <div class="box-container">
+            <div class="form-container">
+                <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
+                <form action="">
+                    <div class="tweet-content">
+                        <input type="text" class="textarea">
+                    </div>
+                    <div class="tweet-toolbar">
+                        <button class="submit-button">Submit</button>
+                    </div>
+            </div>
+            </form>
+        </div>
     </div>
     <div class="graph">
         <canvas id="watsonChart"></canvas>
     </div>
     <div class="twitter-box">
-        
+
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="apikey.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
