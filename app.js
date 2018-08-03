@@ -1,7 +1,7 @@
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 
 var data = {};
-data.text = "I hate you";
+data.text = "I hate you.";
 
 $.ajax(
     { url: watsonUrl, 
@@ -13,3 +13,4 @@ $.ajax(
         console.log(body.document_tone.tones[0].tone_name + ', Score: ' + body.document_tone.tones[0].score);
     }
     });
+
