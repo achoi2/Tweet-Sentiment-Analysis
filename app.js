@@ -2,22 +2,14 @@ var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?ve
 var context = document.querySelector('#watsonChart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
 
-
-var handleSubmit = function () {
-    event.preventDefault();
-    var data = {"text": document.querySelector('.textarea').value};
-    getWatsonData(data);
-    console.log(data);
-}
-
 var toneChartObject = {Analytical: 0,
-                        Anger: 0,
-                        Confident: 0,
-                        Fear: 0,
-                        Joy: 0,
-                        Sadness: 0,
-                        Tentative: 0
-                        };
+    Anger: 0,
+    Confident: 0,
+    Fear: 0,
+    Joy: 0,
+    Sadness: 0,
+    Tentative: 0
+    };
 
 var toneArray = ['Analytical', 'Anger', 'Confident', 'Fear', 'Joy', 'Sadness', 'Tentative'];
 
@@ -41,7 +33,6 @@ var getWatsonData = function (data) {
         }
         });
 }
-
 
 var mixedChart = new Chart(context, {
     type: 'bar',
@@ -102,5 +93,12 @@ var mixedChart = new Chart(context, {
         }
     }
 });
+
+var handleSubmit = function () {
+    event.preventDefault();
+    var data = {"text": document.querySelector('.textarea').value};
+    getWatsonData(data);
+    console.log(data);
+}
 
 submitButton.addEventListener('click', handleSubmit);
