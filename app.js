@@ -32,14 +32,16 @@ $.ajax(
             }  
         }      
     }
-    });
+});
+
+var toneValuesArray = Object.values(toneChartObject);
 
 var mixedChart = new Chart(context, {
     type: 'bar',
     data: {
         datasets: [{
             label: 'Tone Score',
-            data: [0, 0.1, 0.2, 0.3, 0.4, 1, 0.6],
+            data: toneValuesArray,
             backgroundColor: 'rgb(65, 193, 244, 0.5)',
             borderColor: 'rgb(65, 193, 244, 0.5)'
             }, {
@@ -68,7 +70,7 @@ var mixedChart = new Chart(context, {
             borderColor: 'rgb(244, 72, 66)',
             showLine: false,
             }],
-        labels: ['Anger', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
+        labels: toneArray
     },
     options: {
         beginatZero: true, 
