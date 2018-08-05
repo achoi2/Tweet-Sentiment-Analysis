@@ -1,8 +1,14 @@
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('#watsonChart').getContext('2d');
+var submitButton = document.querySelector('.submit-button');
 
-var data = {};
-data.text = "I hate you.";
+
+var handleSubmit = function () {
+    event.preventDefault();
+    var data = {"text": document.querySelector('.textarea').value};
+    getWatsonData(data);
+    console.log(data);
+}
 
 var toneChartObject = {Analytical: 0,
                         Anger: 0,
@@ -15,24 +21,27 @@ var toneChartObject = {Analytical: 0,
 
 var toneArray = ['Analytical', 'Anger', 'Confident', 'Fear', 'Joy', 'Sadness', 'Tentative'];
 
-$.ajax(
-    { url: watsonUrl, 
-    data: data, 
-    headers: { 
-        "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
-    success: function(watsonData) {
-        var toneObject = watsonData.document_tone.tones 
-        for (var i = 0; i < toneObject.length; i++) {
-            var watsonToneName = toneObject[i].tone_name
-            for (var j = 0; j < toneArray.length; j++) {
-                var toneName = toneArray[j]
-                if (watsonToneName === toneName) {
-                    toneChartObject[toneName] = toneObject[i].score;
-                }
-            }  
-        }      
-    }
-    });
+var getWatsonData = function (data) {
+    $.ajax(
+        { url: watsonUrl, 
+        data: data, 
+        headers: { 
+            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
+        success: function(watsonData) {
+            var toneObject = watsonData.document_tone.tones 
+            for (var i = 0; i < toneObject.length; i++) {
+                var watsonToneName = toneObject[i].tone_name
+                for (var j = 0; j < toneArray.length; j++) {
+                    var toneName = toneArray[j]
+                    if (watsonToneName === toneName) {
+                        toneChartObject[toneName] = toneObject[i].score;
+                    }
+                }  
+            }      
+        }
+        });
+}
+
 
 var mixedChart = new Chart(context, {
     type: 'bar',
@@ -93,3 +102,5 @@ var mixedChart = new Chart(context, {
         }
     }
 });
+
+submitButton.addEventListener('click', handleSubmit);
