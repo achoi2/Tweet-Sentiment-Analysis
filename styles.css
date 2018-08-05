@@ -11,6 +11,12 @@ html, body {
     font-family: "Zilla Slab";
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -68,4 +74,8 @@ header {
     height: 3em;
     border-radius: .9em;
     margin-top: .4em;
+}
+
+.graph {
+    width: 40em;
 }
