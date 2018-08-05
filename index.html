@@ -5,13 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab|Zilla+Slab+Highlight" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Tonely</title>
 </head>
 
 <body>
     <header>
-        <h1 class="header-text">Tonely</h1>
+        <h1 class="header-text">Tonely&#9745;</h1>
+        <nav class="nav">
+            <a href="about.html" class="nav-link">About</a>
+            <a href="index.html" class="nav-link">Submit a Tweet</a>
+            <a href="approvals.html" class="nav-link">Pending Approvals</a>
+        </nav>
     </header>
     <div class="text-box">
         <div class="box-container">
@@ -19,10 +25,10 @@
                 <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
                 <form action="">
                     <div class="tweet-content">
-                        <input type="text" class="textarea">
+                            <textarea cols="40" rows="20" class="textarea" placeholder="Type a tweet to be analyzed."></textarea>
                     </div>
                     <div class="tweet-toolbar">
-                        <button class="submit-button">Submit</button>
+                        <button class="submit-button">Submit For Analysis</button>
                     </div>
             </div>
             </form>
