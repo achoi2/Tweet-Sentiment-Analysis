@@ -1,6 +1,7 @@
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('#watsonChart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
+var approveButton = document.querySelector('.approve-button');
 
 var toneChartObject = {Analytical: 0,
     Anger: 0,
@@ -102,3 +103,7 @@ var handleSubmit = function () {
 }
 
 submitButton.addEventListener('click', handleSubmit);
+approveButton.addEventListener('click', function() {
+    window.location.replace('approvals.html');
+});
+
