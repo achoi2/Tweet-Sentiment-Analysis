@@ -93,3 +93,10 @@ var mixedChart = new Chart(context, {
         }
     }
 });
+
+var approveButton = document.querySelector('.approve-button');
+
+approveButton.addEventListener('click', function() {
+    window.location.replace('approvals.html');
+});
+
