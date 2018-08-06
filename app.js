@@ -5,13 +5,13 @@ var approveButton = document.querySelector('.approve-button');
 var setBenchmarkValues = function(minArray, targetArray, maxArray) {
     var sliders = document.querySelectorAll('.slider');
     for (var k = 0; k < 7; k++) {
-        var snapValues = sliders[k].noUiSlider.get();
-        for (var l = 0; l < snapValues.length; l++) {
-            snapValues[l] = parseFloat(snapValues[l]);
+        var handleValues = sliders[k].noUiSlider.get();
+        for (var l = 0; l < handleValues.length; l++) {
+            handleValues[l] = parseFloat(handleValues[l]);
         }
-        minArray.push(snapValues[0]);
-        targetArray.push(snapValues[1]);
-        maxArray.push(snapValues[2]);
+        minArray[k] = (handleValues[0]);
+        targetArray[k] = (handleValues[1]);
+        maxArray[k] = (handleValues[2]);
     }
 }
 
@@ -35,11 +35,11 @@ var loadingAnimation = function () {
 
 var newChart = function (toneChartObject, toneArray) {
     var context = document.querySelector('.watson-chart').getContext('2d');
-    var minArray = [];
-    var targetArray = [];
-    var maxArray = [];
+    var minArray = [0, 0, 0, 0, 0, 0, 0];
+    var targetArray = [0, 0, 0, 0, 0, 0, 0];
+    var maxArray = [0, 0, 0, 0, 0, 0, 0];
     setBenchmarkValues(minArray, targetArray, maxArray);
-    toneValuesArray = Object.values(toneChartObject);
+    var toneValuesArray = Object.values(toneChartObject);
         new Chart(context, {
         type: 'bar',
         data: {
@@ -168,10 +168,10 @@ var createSliders = function() {
             var sliderMin = "." + sliderName[0] + "-min";
             var sliderTarget = "." + sliderName[0] + "-target";
             var sliderMax = "." + sliderName[0] + "-max"
-            var snapValues = slider.noUiSlider.get();
-            document.querySelector(sliderMin).textContent = "Min: " + snapValues[0];
-            document.querySelector(sliderTarget).textContent = "Target: " + snapValues[1];
-            document.querySelector(sliderMax).textContent = "Max: " + snapValues[2];
+            var handleValues = slider.noUiSlider.get();
+            document.querySelector(sliderMin).textContent = "Min: " + handleValues[0];
+            document.querySelector(sliderTarget).textContent = "Target: " + handleValues[1];
+            document.querySelector(sliderMax).textContent = "Max: " + handleValues[2];
         });
     }
 
