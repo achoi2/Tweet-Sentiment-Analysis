@@ -132,3 +132,43 @@ approveButton.addEventListener('click', function() {
     window.location.replace('approvals.html');
 });
 
+
+var createSliders = function() {
+    var sliders = document.querySelectorAll('.slider');
+    console.log(sliders);
+
+    var createSlider = function createSlider(slider) {
+        noUiSlider.create(slider, {
+            start: [ 0.1, 0.5, 0.9 ],
+            connect: [false, true, true, false],
+            step: 0.1,
+            range: {
+                'min': [  0 ],
+                'max': [ 1 ]
+            }
+        });
+    }
+
+    var addOnUpdate = function addOnUpdate(slider) {
+        slider.noUiSlider.on('update', function() {
+            var sliderName = slider.getAttribute('class');
+            sliderName = sliderName.split(" ");
+            var sliderMin = "." + sliderName[0] + "-min";
+            var sliderTarget = "." + sliderName[0] + "-target";
+            var sliderMax = "." + sliderName[0] + "-max"
+            snapValues = slider.noUiSlider.get();
+            document.querySelector(sliderMin).textContent = "Min: " + snapValues[0];
+            document.querySelector(sliderTarget).textContent = "Target: " + snapValues[1];
+            document.querySelector(sliderMax).textContent = "Max: " + snapValues[2];
+        });
+    }
+
+    for (var i = 0; i < 7; i++) {
+        var currentSlider = sliders[i];
+        createSlider(currentSlider);
+        addOnUpdate(currentSlider);
+    }
+}
+
+createSliders();
+

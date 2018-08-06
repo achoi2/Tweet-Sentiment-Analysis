@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Zilla+Slab:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Tonely</title>
@@ -35,6 +36,71 @@
                 </div>
             </div>
         </div>
+        <div class="benchmark-sliders">
+            <div class="slider-group">
+                <div class="slider-header">
+                    <p class="bold">Analytical</p>
+                    <p class="analytical-min">Min:</p>
+                    <p class='analytical-target'>Target:</p>
+                    <p class='analytical-max'>Max:</p>
+                </div>
+                <div class="analytical slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <p class="bold">Anger</p>
+                    <p class="anger-min">Min:</p>
+                    <p class='anger-target'>Target:</p>
+                    <p class='anger-max'>Max:</p>
+                </div>
+                <div class="anger slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <p class="bold">Confidence</p>
+                    <p class="confidence-min">Min:</p>
+                    <p class='confidence-target'>Target:</p>
+                    <p class='confidence-max'>Max:</p>
+                </div>
+                <div class="confidence slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <p class="bold">Fear</p>
+                    <p class="fear-min">Min:</p>
+                    <p class='fear-target'>Target:</p>
+                    <p class='fear-max'>Max:</p>
+                </div>
+                <div class="fear slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class="slider-header">
+                    <p class="bold">Joy</p>
+                    <p class="joy-min">Min:</p>
+                    <p class='joy-target'>Target:</p>
+                    <p class='joy-max'>Max:</p>
+                </div>
+                <div class="joy slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class='slider-header'>
+                    <p class="bold">Sadness</p>
+                    <p class="sadness-min">Min:</p>
+                    <p class='sadness-target'>Target:</p>
+                    <p class='sadness-max'>Max:</p>
+                </div>
+                <div class="sadness slider"></div>
+            </div>
+            <div class="slider-group">
+                <div class='slider-header'>
+                    <p class="bold">Tentative</p>
+                    <p class="tentative-min">Min:</p>
+                    <p class='tentative-target'>Target:</p>
+                    <p class='tentative-max'>Max:</p>
+                </div>
+                <div class="tentative slider"></div>
+            </div>
+        </div>
         <div class="graph">
             <div class="loading-text light-outline">
                 <span class="T loading-letter">T</span><span class="o loading-letter">o</span><span class="n loading-letter">n</span><span class="e loading-letter">e</span><span class="l loading-letter">l</span><span class="y loading-letter">y</span><span class="check loading-letter">&#9745;</span>
@@ -48,6 +114,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
     <script src="apikey.js"></script>
     <script src="app.js"></script>  
 </body>

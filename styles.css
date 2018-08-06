@@ -91,6 +91,20 @@ body {
     position: relative;
 }
 
+.slider-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.slider {
+    margin: 1em;
+    color: rgb(111, 218, 226);
+}
+
+.bold {
+    font-weight: bold;
+}
+
 .watson-chart {
     display: flex;
 }
