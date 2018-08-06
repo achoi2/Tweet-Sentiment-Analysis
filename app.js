@@ -109,7 +109,15 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
     });     
 } 
 
-
+var showTwitterText = function (text) {
+    var approveButton = document.querySelector('.approve-button');
+    var twitterText = document.querySelector('.tweet-submission');
+    twitterText.textContent = text
+    approveButton.addEventListener('click', function (e) {
+        e.preventDefault()
+        console.log(text)
+    });
+};
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
@@ -129,15 +137,6 @@ var handleSubmit = function () {
     getWatsonData(data, toneChartObject, toneArray);
 }
 
-var showTwitterText = function(text) {
-    var approveButton = document.querySelector('.approve-button');
-    var twitterText = document.querySelector('.tweet-submission');
-    twitterText.textContent = text
-    approveButton.addEventListener('click', function (e) {
-        e.preventDefault()
-        console.log(text)
-    });
-};
 
 submitButton.addEventListener('click', handleSubmit);
 
