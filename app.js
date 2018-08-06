@@ -107,3 +107,24 @@ approveButton.addEventListener('click', function() {
     window.location.replace('approvals.html');
 });
 
+
+var createSliders = function() {
+    var sliders = document.querySelectorAll('.slider');
+    console.log(sliders);
+    for (var i = 0; i < 7; i++) {
+        var slider = sliders[i];
+        console.log(slider);
+        noUiSlider.create(slider, {
+            start: [ 0.1, 0.5, 0.9 ],
+            connect: [false, true, true, false],
+            step: 0.1,
+            range: {
+                'min': [  0 ],
+                'max': [ 1 ]
+            }
+        });
+    }
+}
+
+createSliders();
+
