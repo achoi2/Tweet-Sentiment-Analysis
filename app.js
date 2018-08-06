@@ -1,13 +1,3 @@
-var config = {
-    apiKey: 'AIzaSyDmXNCio9fnbFXkkunoCbTgBuCvTijxG5I',
-    authDomain: 'tonely-818ab.firebaseapp.com',
-    databaseURL: 'https://tonely-818ab.firebaseio.com',
-    projectId: 'tonely-818ab',
-    storageBucket: 'tonely-818ab.appspot.com',
-    messagingSenderId: '845746318728'
-};
-firebase.initializeApp(config);
-
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
