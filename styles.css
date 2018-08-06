@@ -98,7 +98,10 @@ body {
 
 .slider {
     margin: 1em;
-    color: rgb(111, 218, 226);
+}
+
+.noUi-connect {
+    background: rgb(111, 218, 226);
 }
 
 .bold {
