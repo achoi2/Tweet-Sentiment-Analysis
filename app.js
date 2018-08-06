@@ -39,7 +39,7 @@ var newChart = function (toneChartObject, toneArray) {
     var targetArray = [];
     var maxArray = [];
     setBenchmarkValues(minArray, targetArray, maxArray);
-    toneValuesArray = Object.values(toneChartObject);
+    var toneValuesArray = Object.values(toneChartObject);
         new Chart(context, {
         type: 'bar',
         data: {
@@ -119,11 +119,20 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
                     }
                 } 
             } 
-            setTimeout(function() {newChart(toneChartObject, toneArray)}, 3500);
+            setTimeout(function() {newChart(toneChartObject, toneArray)}, 3300);
         }
     });     
 } 
 
+var showTwitterText = function (text) {
+    var approveButton = document.querySelector('.approve-button');
+    var twitterText = document.querySelector('.tweet-submission');
+    twitterText.textContent = text
+    approveButton.addEventListener('click', function (e) {
+        e.preventDefault()
+        console.log(text)
+    });
+};
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
@@ -137,14 +146,14 @@ var handleSubmit = function () {
     
     var toneArray = ['Analytical', 'Anger', 'Confident', 'Fear', 'Joy', 'Sadness', 'Tentative'];
     event.preventDefault();
-    var data = {"text": document.querySelector('.textarea').value};
+    var textValue = document.querySelector('.textarea').value;
+    var data = {"text": textValue};
+    showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
 }
 
+
 submitButton.addEventListener('click', handleSubmit);
-approveButton.addEventListener('click', function() {
-    window.location.replace('approvals.html');
-});
 
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
