@@ -19,29 +19,29 @@
             <a href="approvals.html" class="nav-link">Pending Approvals</a>
         </nav>
     </header>
-    <div class="text-box">
-        <div class="box-container">
-            <div class="form-container">
-                <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
-                <form action="">
-                    <div class="tweet-content">
-                        <textarea cols="40" rows="20" class="textarea" placeholder="Type a tweet to be analyzed."></textarea>
-                    </div>
-                    <div class="tweet-toolbar">
-                        <button class="submit-button">Submit For Analysis</button>
-                    </div>
+    <div class="main">
+        <div class="text-box">
+            <div class="box-container">
+                <div class="form-container">
+                    <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
+                    <form action="">
+                        <div class="tweet-content">
+                            <textarea cols="40" rows="5" class="textarea" placeholder="Type a tweet to be analyzed."></textarea>
+                        </div>
+                        <div class="tweet-toolbar">
+                            <button class="submit-button">Submit For Analysis</button>
+                        </div>
+                </form>
+                </div>
             </div>
-            </form>
         </div>
-    </div>
-    <div class="graph">
-        <canvas id="watsonChart"></canvas>
-    </div>
-    <div class="approvals-page">
-        <button class="approve-button">click to have tweet approved</button>
-    </div>
-    <div class="twitter-box">
-
+        <div class="graph">
+            <canvas id="watsonChart"></canvas>
+        </div>
+        <div class="approvals-page">
+            <button class="approve-button">click to have tweet approved</button>
+        </div>
+        <div class="twitter-box"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>

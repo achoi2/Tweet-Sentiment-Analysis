@@ -15,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: 
 }
 
 header {
@@ -22,9 +23,10 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: #1b95e0; */
     background-color:  rgb(111, 218, 226);
     height: 5em;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .header-text {
@@ -41,14 +43,20 @@ header {
     padding-left: 1em;
 }
 
+.main {
+    background-color: rgba(111, 218, 226, 0.15);
+    padding: 1em;
+}
+
 .form-container {
-    margin: 0 auto;
+    margin: 1em auto;
     display: flex;
     justify-content: center;
     background-color: rgb(232, 245, 253);
-    width: 30em;
-    height: 10em;
-    padding-top: 1.3em;
+    padding: 0.9em;
+    box-sizing: border-box;
+    border: 1px solid #1dcaff;
+    border-radius: 0.2em;
 }
 
 .form-container-img {
@@ -59,8 +67,6 @@ header {
 }
 
 .textarea {
-    width: 31.6em;
-    height: 6.25em;
     border-color: #a4d9f9;
     border-radius: .5em;
     border: 1px solid #1dcaff;
@@ -77,5 +83,6 @@ header {
 }
 
 .graph {
-    width: 40em;
+    width: 24em;
+    min-height: 30em;
 }
