@@ -105,7 +105,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
                     }
                 } 
             } 
-            setTimeout(function() {newChart(toneChartObject, toneArray)}, 3500);
+            setTimeout(function() {newChart(toneChartObject, toneArray)}, 3300);
         }
     });     
 } 
