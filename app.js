@@ -1,3 +1,13 @@
+var config = {
+    apiKey: 'AIzaSyDmXNCio9fnbFXkkunoCbTgBuCvTijxG5I',
+    authDomain: 'tonely-818ab.firebaseapp.com',
+    databaseURL: 'https://tonely-818ab.firebaseio.com',
+    projectId: 'tonely-818ab',
+    storageBucket: 'tonely-818ab.appspot.com',
+    messagingSenderId: '845746318728'
+};
+firebase.initializeApp(config);
+
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
@@ -112,11 +122,39 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 var showTwitterText = function (text) {
     var approveButton = document.querySelector('.approve-button');
     var twitterText = document.querySelector('.tweet-submission');
-    twitterText.textContent = text
+    var tweetsModal = document.querySelector('.tweets-modal');
+    var modalBackdrop = document.querySelector('.modal-backdrop')
+
+    var database = firebase.database();
+    var ref = database.ref('tweets')
+
+    twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
-        e.preventDefault()
-        console.log(text)
+        e.preventDefault();
+        tweetsModal.style.display = 'block';
+        modalBackdrop.style.display = 'block';
+        var tweets = { tweet: text }
+        ref.push(tweets);
     });
+
+    var gotData = function (data) {
+        var tweets = data.val();
+        var listOfTweets = document.querySelector(".listOfTweets")
+        for (var property in tweets) {
+            var tweetList = tweets[property]['tweet']
+            var tweetLi = document.createElement('li')
+            tweetLi.textContent = tweetList
+
+            listOfTweets.appendChild(tweetLi)
+        }
+    }
+    
+    var errData = function (err) {
+        console.log('Error');
+        console.log(err);
+    }
+    
+    ref.on('value', gotData, errData); 
 };
 
 var handleSubmit = function () {
@@ -137,9 +175,7 @@ var handleSubmit = function () {
     getWatsonData(data, toneChartObject, toneArray);
 }
 
-
 submitButton.addEventListener('click', handleSubmit);
-
 
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
