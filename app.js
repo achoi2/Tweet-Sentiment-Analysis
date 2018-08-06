@@ -111,9 +111,8 @@ approveButton.addEventListener('click', function() {
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
     console.log(sliders);
-    for (var i = 0; i < 7; i++) {
-        var slider = sliders[i];
-        console.log(slider);
+
+    var createSlider = function createSlider(slider) {
         noUiSlider.create(slider, {
             start: [ 0.1, 0.5, 0.9 ],
             connect: [false, true, true, false],
@@ -123,6 +122,26 @@ var createSliders = function() {
                 'max': [ 1 ]
             }
         });
+    }
+
+    var addOnUpdate = function addOnUpdate(slider) {
+        slider.noUiSlider.on('update', function() {
+            var sliderName = slider.getAttribute('class');
+            sliderName = sliderName.split(" ");
+            var sliderMin = "." + sliderName[0] + "-min";
+            var sliderTarget = "." + sliderName[0] + "-target";
+            var sliderMax = "." + sliderName[0] + "-max"
+            snapValues = slider.noUiSlider.get();
+            document.querySelector(sliderMin).textContent = "Min: " + snapValues[0];
+            document.querySelector(sliderTarget).textContent = "Target: " + snapValues[1];
+            document.querySelector(sliderMax).textContent = "Max: " + snapValues[2];
+        });
+    }
+
+    for (var i = 0; i < 7; i++) {
+        var currentSlider = sliders[i];
+        createSlider(currentSlider);
+        addOnUpdate(currentSlider);
     }
 }
 
