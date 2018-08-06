@@ -1,7 +1,6 @@
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
-var approveButton = document.querySelector('.approve-button');
 var toneValuesArray = [];  
 
 var loadingAnimation = function () {
@@ -110,6 +109,15 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
     });     
 } 
 
+var showTwitterText = function (text) {
+    var approveButton = document.querySelector('.approve-button');
+    var twitterText = document.querySelector('.tweet-submission');
+    twitterText.textContent = text
+    approveButton.addEventListener('click', function (e) {
+        e.preventDefault()
+        console.log(text)
+    });
+};
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
@@ -123,14 +131,14 @@ var handleSubmit = function () {
     
     var toneArray = ['Analytical', 'Anger', 'Confident', 'Fear', 'Joy', 'Sadness', 'Tentative'];
     event.preventDefault();
-    var data = {"text": document.querySelector('.textarea').value};
+    var textValue = document.querySelector('.textarea').value;
+    var data = {"text": textValue};
+    showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
 }
 
+
 submitButton.addEventListener('click', handleSubmit);
-approveButton.addEventListener('click', function() {
-    window.location.replace('approvals.html');
-});
 
 
 var createSliders = function() {
