@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Zilla+Slab|Zilla+Slab+Highlight" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.css" />
     <link rel="stylesheet" href="styles.css">
     <title>Tonely</title>
 </head>
@@ -35,6 +36,73 @@
                 </div>
             </div>
         </div>
+        <div class="benchmark-sliders">
+            <div class="sliders">
+                <div class="slider-group">
+                    <button>Analytical</button>
+                    <div class="values">
+                        <p class="analytical-min">Min:</p>
+                        <p class='analytical-target'>Target:</p>
+                        <p class='analytical-max'>Max:</p>
+                    </div>
+                    <div class="analytical slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Anger</button>
+                    <div class="values">
+                        <p class="anger-min">Min:</p>
+                        <p class='anger-target'>Target:</p>
+                        <p class='anger-max'>Max:</p>
+                    </div>
+                    <div class="anger slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Confidence</button>
+                    <div class="values">
+                        <p class="confidence-min">Min:</p>
+                        <p class='confidence-target'>Target:</p>
+                        <p class='confidence-max'>Max:</p>
+                    </div>
+                    <div class="confidence slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Fear</button>
+                    <div class="values">
+                        <p class="fear-min">Min:</p>
+                        <p class='fear-target'>Target:</p>
+                        <p class='fear-max'>Max:</p>
+                    </div>
+                    <div class="fear slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Joy</button>
+                    <div class="values">
+                        <p class="joy-min">Min:</p>
+                        <p class='joy-target'>Target:</p>
+                        <p class='joy-max'>Max:</p>
+                    </div>
+                    <div class="joy slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Sadness</button>
+                    <div class="values">
+                        <p class="sadness-min">Min:</p>
+                        <p class='sadness-target'>Target:</p>
+                        <p class='sadness-max'>Max:</p>
+                    </div>
+                    <div class="sadness slider"></div>
+                </div>
+                <div class="slider-group">
+                    <button>Tentative</button>
+                    <div class="values">
+                        <p class="tentative-min">Min:</p>
+                        <p class='tentative-target'>Target:</p>
+                        <p class='tentative-max'>Max:</p>
+                    </div>
+                    <div class="tentative slider"></div>
+                </div>
+            </div>
+        </div>
         <div class="graph">
             <canvas id="watsonChart"></canvas>
         </div>
@@ -45,6 +113,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.1.0/nouislider.min.js"></script>
     <script src="apikey.js"></script>
     <script src="app.js"></script>  
 </body>
