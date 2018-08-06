@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab|Zilla+Slab+Highlight" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Tonely</title>
 </head>
 
 <body>
     <header>
-        <h1 class="header-text">Tonely&#9745;</h1>
+        <h1 class="header-text dark-outline">Tonely&#9745;</h1>
         <nav class="nav">
-            <a href="about.html" class="nav-link">About</a>
-            <a href="index.html" class="nav-link">Submit a Tweet</a>
-            <a href="approvals.html" class="nav-link">Pending Approvals</a>
+            <a href="about.html" class="nav-link dark-outline">About</a>
+            <a href="index.html" class="nav-link dark-outline">Submit a Tweet</a>
+            <a href="approvals.html" class="nav-link dark-outline">Pending Approvals</a>
         </nav>
     </header>
     <div class="main">
@@ -36,7 +36,10 @@
             </div>
         </div>
         <div class="graph">
-            <canvas id="watsonChart"></canvas>
+            <div class="loading-text light-outline">
+                <span class="T loading-letter">T</span><span class="o loading-letter">o</span><span class="n loading-letter">n</span><span class="e loading-letter">e</span><span class="l loading-letter">l</span><span class="y loading-letter">y</span><span class="check loading-letter">&#9745;</span>
+            </div>
+            <canvas  class="watson-chart"></canvas>
         </div>
         <div class="approvals-page">
             <button class="approve-button">click to have tweet approved</button>
