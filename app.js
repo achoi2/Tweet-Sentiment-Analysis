@@ -1,3 +1,5 @@
+firebase.initializeApp(firebaseConfig);
+
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
 var submitButton = document.querySelector('.submit-button');
@@ -205,4 +207,3 @@ var createSliders = function() {
 }
 
 createSliders();
-
