@@ -24,10 +24,10 @@
         <div class="text-box">
             <div class="box-container">
                 <div class="form-container">
-                    <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
                     <form action="">
                         <div class="tweet-content">
-                            <textarea cols="40" rows="5" class="textarea" placeholder="Type a tweet to be analyzed."></textarea>
+                            <img src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png" alt="" class="form-container-img">
+                            <textarea cols="35" rows="5" class="textarea" placeholder="Type a tweet to be analyzed."></textarea>
                         </div>
                         <div class="all-sliders">
                             <div class="slider-group">
@@ -107,14 +107,16 @@
             </div>
             <canvas  class="watson-chart"></canvas>
         </div>
-        <div class="approvals-modal">
-            <h3 class="tweet-submission"></h3>
-            <button class="approve-button">click to have tweet approved</button>
+        <div class="approval-div">
+                <h3 class="tweet-submission"></h3>
+                <button class="approve-button">click to have tweet approved</button>
         </div>
-        <div class="modal-backdrop hidden">
-            <div class="tweets-modal hidden">
-                <ul class="listOfTweets">
-                </ul>
+        <div class="approvals-modal">
+            <div class="modal-backdrop hidden">
+                <div class="tweets-modal hidden">
+                    <ul class="listOfTweets">
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
