@@ -1,9 +1,21 @@
 firebase.initializeApp(firebaseConfig);
-
-var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
+var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
-var toneValuesArray = [];  
+var approveButton = document.querySelector('.approve-button');
+
+var setBenchmarkValues = function(minArray, targetArray, maxArray) {
+    var sliders = document.querySelectorAll('.slider');
+    for (var k = 0; k < 7; k++) {
+        var handleValues = sliders[k].noUiSlider.get();
+        for (var l = 0; l < handleValues.length; l++) {
+            handleValues[l] = parseFloat(handleValues[l]);
+        }
+        minArray[k] = (handleValues[0]);
+        targetArray[k] = (handleValues[1]);
+        maxArray[k] = (handleValues[2]);
+    }
+}
 
 var loadingAnimation = function () {
     var loadingText = document.querySelector('.loading-text');
@@ -11,7 +23,6 @@ var loadingAnimation = function () {
     var doSetTimeout = function (j) {
         setTimeout(function () {
             var letter = letters[j];
-            console.log(letter);
             letter.classList.remove('loading-letter')
             letter.classList.add('show');
         }, i * 400);
@@ -25,7 +36,12 @@ var loadingAnimation = function () {
 }
 
 var newChart = function (toneChartObject, toneArray) {
-    toneValuesArray = Object.values(toneChartObject);
+    var context = document.querySelector('.watson-chart').getContext('2d');
+    var minArray = [0, 0, 0, 0, 0, 0, 0];
+    var targetArray = [0, 0, 0, 0, 0, 0, 0];
+    var maxArray = [0, 0, 0, 0, 0, 0, 0];
+    setBenchmarkValues(minArray, targetArray, maxArray);
+    var toneValuesArray = Object.values(toneChartObject);
         new Chart(context, {
         type: 'bar',
         data: {
@@ -36,29 +52,35 @@ var newChart = function (toneChartObject, toneArray) {
                 borderColor: 'rgb(65, 193, 244, 0.5)'
                 }, {
                 label: 'Minimum Approval Score',
-                data: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+                data: minArray,
                 // Changes this dataset to become a line
                 type: 'line',
                 fill: false,
                 backgroundColor: 'rgb(244, 72, 66)',
                 borderColor: 'rgb(244, 72, 66)',
-                showLine: false
+                showLine: false,
+                pointStyle: 'rect',
+                borderWidth: 2.5
                 }, {
                 label: 'Target Approval Score',
-                data: [0.4, 0.6, 0.5, 0.4, 0.3, 0.3, 0.6],
+                data: targetArray,
                 type: 'line',
                 fill: false, 
                 backgroundColor: 'rgb(54, 216, 36)',
                 borderColor: 'rgb(54, 216, 36)',
                 showLine: false,
+                pointStyle: 'rect', 
+                borderWidth: 2.5
                 }, {
                 label: 'Maximum Approval Score',
-                data: [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+                data: maxArray,
                 type: 'line',
                 fill: false,
                 backgroundColor: 'rgb(244, 72, 66)',
                 borderColor: 'rgb(244, 72, 66)',
                 showLine: false,
+                pointStyle: 'rect',
+                borderWidth: 2.5
                 }],
             labels: toneArray
         },
@@ -95,7 +117,6 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
         headers: { 
             "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword), 'Access-Control-Allow-Headers': 'Authorization' },
         success: function(watsonData) {
-            console.log(watsonData);
             var toneObject = watsonData.document_tone.tones 
             for (var i = 0; i < toneObject.length; i++) {
                 var watsonToneName = toneObject[i].tone_name
@@ -167,13 +188,13 @@ var handleSubmit = function () {
     var data = {"text": textValue};
     showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
+    $('.all-sliders').addClass('hidden');
 }
 
 submitButton.addEventListener('click', handleSubmit);
 
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
-    console.log(sliders);
 
     var createSlider = function createSlider(slider) {
         noUiSlider.create(slider, {
@@ -194,10 +215,10 @@ var createSliders = function() {
             var sliderMin = "." + sliderName[0] + "-min";
             var sliderTarget = "." + sliderName[0] + "-target";
             var sliderMax = "." + sliderName[0] + "-max"
-            snapValues = slider.noUiSlider.get();
-            document.querySelector(sliderMin).textContent = "Min: " + snapValues[0];
-            document.querySelector(sliderTarget).textContent = "Target: " + snapValues[1];
-            document.querySelector(sliderMax).textContent = "Max: " + snapValues[2];
+            var handleValues = slider.noUiSlider.get();
+            document.querySelector(sliderMin).textContent = "Min: " + handleValues[0];
+            document.querySelector(sliderTarget).textContent = "Target: " + handleValues[1];
+            document.querySelector(sliderMax).textContent = "Max: " + handleValues[2];
         });
     }
 
@@ -209,4 +230,3 @@ var createSliders = function() {
 }
 
 createSliders();
-
