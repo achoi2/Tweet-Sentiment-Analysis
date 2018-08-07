@@ -12,6 +12,7 @@ html, body {
 }
 
 body {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +48,7 @@ body {
 
 .main {
     background-color: rgba(111, 218, 226, 0.15);
-    padding: 1em;
+    padding: 0;
     border: 1px solid rgba(111, 218, 226, 0.25);
 }
 
