@@ -28,7 +28,7 @@ body {
     min-width: 24em;
     width: 100%;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .header-text {
@@ -46,9 +46,14 @@ body {
 }
 
 .main {
+    flex-grow: 1;
     background-color: rgba(111, 218, 226, 0.15);
-    padding: 0;
+    padding: 1em;
     border: 1px solid rgba(111, 218, 226, 0.25);
+}
+
+.tweet-content {
+    padding-bottom: 1em;
 }
 
 .form-container {
@@ -63,15 +68,10 @@ body {
 }
 
 .form-container-img {
-    display: flex;
     height: 2.6em;
     width: 2.6em;
     border-radius: 50%;
     margin-right: .9em;
-}
-
-.tweet-content {
-    display: flex;
 }
 
 .textarea {
@@ -98,15 +98,11 @@ body {
 .slider-header {
     display: flex;
     justify-content: space-evenly;
-    font-size: 0.85em;
 }
 
 .slider {
     margin: 1em;
-}
-
-.noUi-connect {
-    background: rgb(111, 218, 226);
+    color: rgb(111, 218, 226);
 }
 
 .bold {
