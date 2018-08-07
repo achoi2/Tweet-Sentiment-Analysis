@@ -1,3 +1,5 @@
+firebase.initializeApp(firebaseConfig);
+var context = document.querySelector('.watson-chart').getContext('2d');
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
 var approveButton = document.querySelector('.approve-button');
@@ -133,11 +135,39 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 var showTwitterText = function (text) {
     var approveButton = document.querySelector('.approve-button');
     var twitterText = document.querySelector('.tweet-submission');
-    twitterText.textContent = text
+    var tweetsModal = document.querySelector('.tweets-modal');
+    var modalBackdrop = document.querySelector('.modal-backdrop')
+
+    var database = firebase.database();
+    var ref = database.ref('tweets')
+
+    twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
-        e.preventDefault()
-        console.log(text)
+        e.preventDefault();
+        tweetsModal.style.display = 'block';
+        modalBackdrop.style.display = 'block';
+        var tweets = { tweet: text }
+        ref.push(tweets);
     });
+
+    var gotData = function (data) {
+        var tweets = data.val();
+        var listOfTweets = document.querySelector(".listOfTweets")
+        for (var property in tweets) {
+            var tweetList = tweets[property]['tweet']
+            var tweetLi = document.createElement('li')
+            tweetLi.textContent = tweetList
+
+            listOfTweets.appendChild(tweetLi)
+        }
+    }
+    
+    var errData = function (err) {
+        console.log('Error');
+        console.log(err);
+    }
+    
+    ref.on('value', gotData, errData); 
 };
 
 var handleSubmit = function () {
@@ -158,7 +188,6 @@ var handleSubmit = function () {
     getWatsonData(data, toneChartObject, toneArray);
     $('.all-sliders').addClass('hidden');
 }
-
 
 submitButton.addEventListener('click', handleSubmit);
 
