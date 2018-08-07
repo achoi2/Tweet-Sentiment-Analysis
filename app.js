@@ -115,7 +115,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
         { url: watsonUrl, 
         data: data, 
         headers: { 
-            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword), 'Access-Control-Allow-Headers': 'Authorization' },
+            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
         success: function(watsonData) {
             var toneObject = watsonData.document_tone.tones 
             for (var i = 0; i < toneObject.length; i++) {
@@ -136,10 +136,10 @@ var showTwitterText = function (text) {
     var approveButton = document.querySelector('.approve-button');
     var twitterText = document.querySelector('.tweet-submission');
     var tweetsModal = document.querySelector('.tweets-modal');
-    var modalBackdrop = document.querySelector('.modal-backdrop')
+    var modalBackdrop = document.querySelector('.modal-backdrop');
 
     var database = firebase.database();
-    var ref = database.ref('tweets')
+    var ref = database.ref('tweets');
 
     twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
@@ -148,19 +148,25 @@ var showTwitterText = function (text) {
         modalBackdrop.classList.remove('hidden');
         tweetsModal.classList.add('display-block');
         modalBackdrop.classList.add('display-block');
-        var tweets = { tweet: text }
+        var tweets = { tweet: text };
         ref.push(tweets);
     });
 
-    var gotData = function (data) {
+
+    var gotData = function (data) {       
         var tweets = data.val();
-        var listOfTweets = document.querySelector(".listOfTweets")
-        for (var property in tweets) {
-            var tweetList = tweets[property]['tweet']
+        var listOfTweets = document.querySelector(".listOfTweets")      
+        for (var tweetID in tweets) {
+            var tweetList = tweets[tweetID]['tweet'];
             var tweetLi = document.createElement('li')
             tweetLi.textContent = tweetList
-
+                 
             listOfTweets.appendChild(tweetLi)
+            tweetLi.addEventListener('click', function(e) {
+                
+                tweetLi.remove();
+                ref.child(tweetID).remove()
+            });
         }
     }
     
@@ -171,6 +177,8 @@ var showTwitterText = function (text) {
     
     ref.on('value', gotData, errData); 
 };
+
+
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
