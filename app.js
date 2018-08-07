@@ -1,12 +1,4 @@
-var config = {
-    apiKey: 'AIzaSyDmXNCio9fnbFXkkunoCbTgBuCvTijxG5I',
-    authDomain: 'tonely-818ab.firebaseapp.com',
-    databaseURL: 'https://tonely-818ab.firebaseio.com',
-    projectId: 'tonely-818ab',
-    storageBucket: 'tonely-818ab.appspot.com',
-    messagingSenderId: '845746318728'
-};
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
 var context = document.querySelector('.watson-chart').getContext('2d');
@@ -101,7 +93,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
         { url: watsonUrl, 
         data: data, 
         headers: { 
-            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
+            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword), 'Access-Control-Allow-Headers': 'Authorization' },
         success: function(watsonData) {
             console.log(watsonData);
             var toneObject = watsonData.document_tone.tones 
@@ -131,8 +123,10 @@ var showTwitterText = function (text) {
     twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
         e.preventDefault();
-        tweetsModal.style.display = 'block';
-        modalBackdrop.style.display = 'block';
+        tweetsModal.classList.remove('hidden');
+        modalBackdrop.classList.remove('hidden');
+        tweetsModal.classList.add('display-block');
+        modalBackdrop.classList.add('display-block');
         var tweets = { tweet: text }
         ref.push(tweets);
     });
