@@ -1,4 +1,4 @@
-var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
+var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
 var approveButton = document.querySelector('.approve-button');
 
@@ -56,7 +56,9 @@ var newChart = function (toneChartObject, toneArray) {
                 fill: false,
                 backgroundColor: 'rgb(244, 72, 66)',
                 borderColor: 'rgb(244, 72, 66)',
-                showLine: false
+                showLine: false,
+                pointStyle: 'rect',
+                borderWidth: 2.5
                 }, {
                 label: 'Target Approval Score',
                 data: targetArray,
@@ -65,6 +67,8 @@ var newChart = function (toneChartObject, toneArray) {
                 backgroundColor: 'rgb(54, 216, 36)',
                 borderColor: 'rgb(54, 216, 36)',
                 showLine: false,
+                pointStyle: 'rect', 
+                borderWidth: 2.5
                 }, {
                 label: 'Maximum Approval Score',
                 data: maxArray,
@@ -73,6 +77,8 @@ var newChart = function (toneChartObject, toneArray) {
                 backgroundColor: 'rgb(244, 72, 66)',
                 borderColor: 'rgb(244, 72, 66)',
                 showLine: false,
+                pointStyle: 'rect',
+                borderWidth: 2.5
                 }],
             labels: toneArray
         },
