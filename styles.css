@@ -15,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(249, 252, 252)
+    background-color: rgb(249, 252, 252);
 }
 
 .header {
@@ -46,13 +46,14 @@ body {
 }
 
 .main {
-    /* display: flex;
+    position: relative;
+    display: flex;
     flex-direction: column;
-    flex-basis: auto; */
+    align-items: center;
     background-color: rgba(111, 218, 226, 0.15);
-    padding: 0;
-    height: 100%;
+    padding: 0.5em;
     border: 1px solid rgba(111, 218, 226, 0.25);
+    overflow-y: scroll;
 }
 
 .form-container {
@@ -95,7 +96,7 @@ body {
 }
 
 .graph {
-    width: 24em;
+    display: none;
     position: relative;
 }
 
@@ -128,7 +129,7 @@ body {
     font-size: 3em;
     font-weight: bold;
     text-align: center;
-    padding: 0.5em;
+    padding: 0;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
@@ -166,6 +167,11 @@ body {
     display: none;
 }
 
+.approval-div {
+    /* position: absolute;
+    bottom: 0; */
+}
+
 .modal-backdrop {
     position: fixed;
     width: 100%;
@@ -188,6 +194,12 @@ body {
     display: block;
 }
 
+@media (min-width: 360px) {
+    .main {
+        padding: 3em;
+    }
+}
+
 @media (min-width: 768px) {
   .graph {
     width: 30em;
@@ -196,7 +208,7 @@ body {
         min-width: 30em;
     }
     .main {
-        padding: 1em;
+        padding: 1em 3em 1em 3em;
     }
 }
 
@@ -209,6 +221,6 @@ body {
         min-width: 50em;
     }
     .main {
-        padding: 2em;
+        padding: 1em 7em 1em 7em;
     }
 }
