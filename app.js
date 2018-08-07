@@ -156,6 +156,7 @@ var handleSubmit = function () {
     var data = {"text": textValue};
     showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
+    $('.all-sliders').addClass('hidden');
 }
 
 
