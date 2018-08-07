@@ -157,6 +157,28 @@ body {
     display: none;
 }
 
+.modal-backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+.tweets-modal {
+    position: fixed;
+    z-index: 200;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+    background: white;
+}
+
+.display-block {
+    display: block;
+}
+
 @media (min-width: 768px) {
   .graph {
     width: 30em;
