@@ -47,7 +47,7 @@ body {
 
 .main {
     background-color: rgba(111, 218, 226, 0.15);
-    padding: 1em;
+    padding: 0;
     border: 1px solid rgba(111, 218, 226, 0.25);
 }
 
@@ -63,10 +63,15 @@ body {
 }
 
 .form-container-img {
+    display: flex;
     height: 2.6em;
     width: 2.6em;
     border-radius: 50%;
     margin-right: .9em;
+}
+
+.tweet-content {
+    display: flex;
 }
 
 .textarea {
@@ -87,13 +92,13 @@ body {
 
 .graph {
     width: 24em;
-    min-height: 30em;
     position: relative;
 }
 
 .slider-header {
     display: flex;
     justify-content: space-evenly;
+    font-size: 0.85em;
 }
 
 .slider {
@@ -182,7 +187,6 @@ body {
 @media (min-width: 768px) {
   .graph {
     width: 30em;
-    min-height: 34em;
   }
     .header {
         min-width: 30em;
@@ -193,7 +197,6 @@ body {
 @media (min-width: 1200px) {
     .graph {
         width: 50em;
-        min-height: 54em;
     }
     .header {
         min-width: 50em;
