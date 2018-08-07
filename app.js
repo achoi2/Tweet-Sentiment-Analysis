@@ -1,3 +1,5 @@
+firebase.initializeApp(firebaseConfig);
+var context = document.querySelector('.watson-chart').getContext('2d');
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
 var approveButton = document.querySelector('.approve-button');
@@ -113,7 +115,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
         { url: watsonUrl, 
         data: data, 
         headers: { 
-            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
+            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword), 'Access-Control-Allow-Headers': 'Authorization' },
         success: function(watsonData) {
             var toneObject = watsonData.document_tone.tones 
             for (var i = 0; i < toneObject.length; i++) {
@@ -133,11 +135,41 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 var showTwitterText = function (text) {
     var approveButton = document.querySelector('.approve-button');
     var twitterText = document.querySelector('.tweet-submission');
-    twitterText.textContent = text
+    var tweetsModal = document.querySelector('.tweets-modal');
+    var modalBackdrop = document.querySelector('.modal-backdrop')
+
+    var database = firebase.database();
+    var ref = database.ref('tweets')
+
+    twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
-        e.preventDefault()
-        console.log(text)
+        e.preventDefault();
+        tweetsModal.classList.remove('hidden');
+        modalBackdrop.classList.remove('hidden');
+        tweetsModal.classList.add('display-block');
+        modalBackdrop.classList.add('display-block');
+        var tweets = { tweet: text }
+        ref.push(tweets);
     });
+
+    var gotData = function (data) {
+        var tweets = data.val();
+        var listOfTweets = document.querySelector(".listOfTweets")
+        for (var property in tweets) {
+            var tweetList = tweets[property]['tweet']
+            var tweetLi = document.createElement('li')
+            tweetLi.textContent = tweetList
+
+            listOfTweets.appendChild(tweetLi)
+        }
+    }
+    
+    var errData = function (err) {
+        console.log('Error');
+        console.log(err);
+    }
+    
+    ref.on('value', gotData, errData); 
 };
 
 var handleSubmit = function () {
@@ -156,8 +188,8 @@ var handleSubmit = function () {
     var data = {"text": textValue};
     showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
+    $('.all-sliders').addClass('hidden');
 }
-
 
 submitButton.addEventListener('click', handleSubmit);
 
