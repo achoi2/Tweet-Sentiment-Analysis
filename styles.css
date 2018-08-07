@@ -28,7 +28,7 @@ body {
     min-width: 24em;
     width: 100%;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .header-text {
@@ -46,8 +46,12 @@ body {
 }
 
 .main {
+    /* display: flex;
+    flex-direction: column;
+    flex-basis: auto; */
     background-color: rgba(111, 218, 226, 0.15);
     padding: 0;
+    height: 100%;
     border: 1px solid rgba(111, 218, 226, 0.25);
 }
 
@@ -191,6 +195,9 @@ body {
     .header {
         min-width: 30em;
     }
+    .main {
+        padding: 1em;
+    }
 }
 
 
@@ -200,5 +207,8 @@ body {
     }
     .header {
         min-width: 50em;
+    }
+    .main {
+        padding: 2em;
     }
 }
