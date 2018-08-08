@@ -164,7 +164,7 @@ var showTwitterText = function (text) {
         if (event.target === modalBackdrop) {
             closeModal();
         }
-    }
+    };
 
     modalBackdrop.addEventListener('click', clickOnBackdrop);
     closeButton.addEventListener('click', closeModal);
@@ -174,9 +174,10 @@ var showTwitterText = function (text) {
         var listOfTweets = document.querySelector(".tweet-list")
         for (var tweetID in tweets) {
             var tweet = tweets[tweetID]['tweet'];
-            var tweetText = document.createElement('p');
+            var tweetText = document.createElement('div');
             tweetText.textContent = tweet;
-
+            tweetText.classList.add('tweet-div');
+           
             var spacer = document.createElement('span');
             spacer.classList.add('spacer');
 
@@ -200,14 +201,31 @@ var showTwitterText = function (text) {
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
 
+            // var copyToClipboard = function (container) {
+            //     if (document.selection) { 
+            //         var range = document.body.createTextRange();
+            //         range.moveToElementText(container);
+            //         range.select().createTextRange();
+            //         document.execCommand("copy"); 
+                
+            //     } else if (window.getSelection) {
+            //         var range = document.createRange();
+            //         range.selectNode(container);
+            //         window.getSelection().addRange(range);
+            //         document.execCommand("copy");
+            //         alert("You have copied the tweet: " + tweet); 
+            //     }
+            // };
+
             var copyButton = document.createElement('button');
             copyButton.textContent = 'Copy';
-            copyButton.classList.add('hidden');
-            copyButton.addEventListener('click', function () {
-                tweetText.select();
-                document.execCommand('copy');
-            })
-
+            copyButton.classList.add('hidden', 'pointer');
+            // copyButton.addEventListener('click', function () {
+            //     copyToClipboard(tweetText)
+                // tweetLi.remove();
+                // ref.child(tweetID).remove();
+                // });
+            
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
             trashIcon.classList.add('pointer');
