@@ -1,4 +1,8 @@
-(function () {
+var submitButton = document.querySelector('.submit-button');
+var approveButton = document.querySelector('.approve-button');
+var pendingList = document.querySelector('.pending-list');
+
+(function() {
     var firebaseObject = localStorage.getItem('firebase-object');
 
     var firebaseConfig = JSON.parse(firebaseObject);
@@ -6,12 +10,7 @@
     firebase.initializeApp(firebaseConfig);
 })();
 
-var context = document.querySelector('.watson-chart').getContext('2d');
-var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
-var submitButton = document.querySelector('.submit-button');
-var approveButton = document.querySelector('.approve-button');
-
-var setBenchmarkValues = function (minArray, targetArray, maxArray) {
+var setBenchmarkValues = function(minArray, targetArray, maxArray) {
     var sliders = document.querySelectorAll('.slider');
     for (var k = 0; k < 7; k++) {
         var handleValues = sliders[k].noUiSlider.get();
@@ -117,7 +116,8 @@ var newChart = function (toneChartObject, toneArray) {
 };
 
 var getWatsonData = function (data, toneChartObject, toneArray) {
-    loadingAnimation();
+    loadingAnimation ();
+    var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
     var watsonUsername = localStorage.getItem('watson-username');
     var watsonPassword = localStorage.getItem('watson-password');
     return $.ajax(
@@ -151,10 +151,10 @@ var handleApprove = function (e) {
 }
 
 var showTwitterText = function (tweets) {
+    var buttonPushed = event.currentTarget;
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
     var closeButton = document.querySelector('.close-button')
-
     var database = firebase.database();
     var ref = database.ref('tweets');
 
@@ -162,7 +162,11 @@ var showTwitterText = function (tweets) {
     modalBackdrop.classList.remove('hidden');
     tweetsModal.classList.add('display-flex');
     modalBackdrop.classList.add('display-flex');
-    ref.push(tweets);
+    var tweets = { tweet: text };
+
+    var pushToFirebase = function() {
+        ref.push(tweets);
+    }
 
     var closeModal = function () {
         tweetsModal.classList.add('hidden');
@@ -183,11 +187,10 @@ var showTwitterText = function (tweets) {
     var clearModal = function (clearList) {
         while (clearList.hasChildNodes()) {
             clearList.removeChild(clearList.lastChild);
-            console.log(clearList);
         }
     }
 
-    var gotData = function (data) {
+    var gotData = function (data) {   
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
         var tweetArray = Object.keys(tweets);
@@ -279,7 +282,10 @@ var showTwitterText = function (tweets) {
         console.log('Error');
         console.log(err);
     }
-
+    
+    if (buttonPushed.nodeName == "BUTTON") {
+        pushToFirebase();
+    }
     ref.on('value', gotData, errData);
 };
 
@@ -307,6 +313,7 @@ var handleSubmit = function () {
 
 submitButton.addEventListener('click', handleSubmit);
 approveButton.addEventListener('click', handleApprove);
+pendingList.addEventListener('click', handleApprove);
 
 var createSliders = function () {
     var sliders = document.querySelectorAll('.slider');
