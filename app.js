@@ -167,7 +167,7 @@ var showTwitterText = function (text) {
         if (event.target === modalBackdrop) {
             closeModal();
         }
-    }
+    };
 
     modalBackdrop.addEventListener('click', clickOnBackdrop);
     closeButton.addEventListener('click', closeModal);
@@ -185,30 +185,78 @@ var showTwitterText = function (text) {
         clearModal(listOfTweets)
         for (var tweetID in tweets) {
             var tweet = tweets[tweetID]['tweet'];
-            var tweetText = document.createElement('p');
+            var tweetText = document.createElement('div');
             tweetText.textContent = tweet;
+            tweetText.classList.add('tweet-div');
+           
+            var spacer = document.createElement('span');
+            spacer.classList.add('spacer');
+
+            var checkmark = document.createElement('p');
+            checkmark.textContent = '\u2611';
+            checkmark.classList.add('hidden', 'blue', 'dark-outline')
         
-            var approvalButton = document.createElement('button');
-            approvalButton.textContent = 'Approve';
-            
+            var modalApprovalButton = document.createElement('button');
+            modalApprovalButton.classList.add('pointer', 'button');
+            modalApprovalButton.textContent = 'Approve';
+            modalApprovalButton.addEventListener('click', function () {
+                tweetLi.classList.add('approved');
+                modalApprovalButton.classList.add('hidden');
+                setTimeout(function () {
+                    checkmark.classList.remove('hidden');
+                    copyButton.classList.remove('hidden');
+                    copyButton.classList.add('display-flex');
+                    }, 1000);
+                });
+
             var listItemContents = document.createElement('div');
+            listItemContents.classList.add('list-item-contents');
+
+            // var copyToClipboard = function (container) {
+            //     if (document.selection) { 
+            //         var range = document.body.createTextRange();
+            //         range.moveToElementText(container);
+            //         range.select().createTextRange();
+            //         document.execCommand("copy"); 
+                
+            //     } else if (window.getSelection) {
+            //         var range = document.createRange();
+            //         range.selectNode(container);
+            //         window.getSelection().addRange(range);
+            //         document.execCommand("copy");
+            //         alert("You have copied the tweet: " + tweet); 
+            //     }
+            // };
+
+            var copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('hidden', 'pointer');
+            // copyButton.addEventListener('click', function () {
+            //     copyToClipboard(tweetText)
+                // tweetLi.remove();
+                // ref.child(tweetID).remove();
+                // });
             
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
+            trashIcon.classList.add('pointer');
             trashIcon.classList.add('trash-icon');
+            trashIcon.addEventListener('click', function() {
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+                }); 
               
             listItemContents.appendChild(tweetText);
-            listItemContents.appendChild(approvalButton);
+            listItemContents.appendChild(modalApprovalButton);
+            listItemContents.appendChild(checkmark);
+            listItemContents.appendChild(spacer);
+            listItemContents.appendChild(copyButton);
             listItemContents.appendChild(trashIcon);
 
             var tweetLi = document.createElement('li');
+            tweetLi.classList.add('tweet-li')
             tweetLi.appendChild(listItemContents)
-            listOfTweets.appendChild(tweetLi);
-
-            trashIcon.addEventListener('click', function() {
-                tweetLi.remove();
-                ref.child(tweetID).remove()
-            }); 
+            listOfTweets.appendChild(tweetLi);   
         }
     };  
     
@@ -219,8 +267,6 @@ var showTwitterText = function (text) {
     
     ref.on('value', gotData, errData); 
 };
-
-
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,

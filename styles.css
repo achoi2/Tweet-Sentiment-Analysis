@@ -47,7 +47,7 @@ body {
 
 .main {
     flex-grow: 1;
-    background-color: rgba(111, 218, 226, 0.15);
+    background-color: rgba(0, 238, 255, 0.15);
     padding: 1em;
     border: 1px solid rgba(111, 218, 226, 0.25);
 }
@@ -159,11 +159,30 @@ body {
 }
 
 .tweet-list {
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
     list-style-type: none;
     width: 20em;
     height: 20em;
     overflow-y: auto;
     background: white;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.approved {
+    background-color: rgba(0, 238, 255, 0.15);
+}
+
+.blue {
+    color: rgb(111, 218, 226);
+}
+
+.list-item-contents {
+    display: flex;
 }
 
 .trash-icon {
