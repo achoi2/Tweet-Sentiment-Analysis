@@ -227,7 +227,6 @@ var handleSubmit = function () {
     event.preventDefault();
     var textValue = document.querySelector('.textarea').value;
     var data = {"text": textValue};
-    // showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
     var twitterText = document.querySelector('.tweet-submission');
     twitterText.textContent = textValue;
