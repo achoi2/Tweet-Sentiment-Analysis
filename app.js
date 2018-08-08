@@ -182,8 +182,9 @@ var showTwitterText = function (text) {
     var gotData = function (data) {       
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
-        clearModal(listOfTweets)
-        for (var tweetID in tweets) {
+        var tweetArray = Object.keys(tweets);
+        clearModal(listOfTweets);
+        tweetArray.forEach(function (tweetID) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('div');
             tweetText.textContent = tweet;
@@ -199,15 +200,6 @@ var showTwitterText = function (text) {
             var modalApprovalButton = document.createElement('button');
             modalApprovalButton.classList.add('pointer', 'modal-approval-button');
             modalApprovalButton.textContent = 'Approve';
-            modalApprovalButton.addEventListener('click', function () {
-                tweetLi.classList.add('approved');
-                modalApprovalButton.classList.add('hidden');
-                setTimeout(function () {
-                    checkmark.classList.remove('hidden');
-                    copyButton.classList.remove('hidden');
-                    copyButton.classList.add('display-flex');
-                    }, 1000);
-                });
 
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
@@ -233,19 +225,15 @@ var showTwitterText = function (text) {
             copyButton.classList.add('hidden', 'pointer', 'modal-approval-button');
             // copyButton.addEventListener('click', function () {
             //     copyToClipboard(tweetText)
-                // tweetLi.remove();
-                // ref.child(tweetID).remove();
-                // });
+            //     tweetLi.remove();
+            //     ref.child(tweetID).remove();
+            //     });
             
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
             trashIcon.classList.add('pointer');
             trashIcon.classList.add('trash-icon');
-            trashIcon.addEventListener('click', function() {
-                tweetLi.remove();
-                ref.child(tweetID).remove();
-                }); 
-              
+           
             listItemContents.appendChild(tweetText);
             listItemContents.appendChild(modalApprovalButton);
             listItemContents.appendChild(checkmark);
@@ -257,7 +245,25 @@ var showTwitterText = function (text) {
             tweetLi.classList.add('tweet-li')
             tweetLi.appendChild(listItemContents)
             listOfTweets.appendChild(tweetLi);   
-        }
+
+            console.log(tweetLi);
+            trashIcon.addEventListener('click', function() {
+                console.log(tweetLi);
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+            });
+
+            modalApprovalButton.addEventListener('click', function () {
+                console.log(tweetLi);
+                tweetLi.classList.add('approved');
+                modalApprovalButton.classList.add('hidden');
+                setTimeout(function () {
+                    checkmark.classList.remove('hidden');
+                    copyButton.classList.remove('hidden');
+                    copyButton.classList.add('display-flex');
+                    }, 1000);
+            });
+        });
     };  
     
     var errData = function (err) {
