@@ -169,9 +169,17 @@ var showTwitterText = function (text) {
     modalBackdrop.addEventListener('click', clickOnBackdrop);
     closeButton.addEventListener('click', closeModal);
 
+    var clearModal = function(clearList) {
+        while (clearList.hasChildNodes()) {
+            clearList.removeChild(clearList.lastChild);
+            console.log(clearList);
+        }
+    }
+
     var gotData = function (data) {       
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
+        clearModal(listOfTweets);
         for (var tweetID in tweets) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('p');
