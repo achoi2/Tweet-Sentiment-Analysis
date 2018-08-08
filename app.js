@@ -1,3 +1,7 @@
+var submitButton = document.querySelector('.submit-button');
+var approveButton = document.querySelector('.approve-button');
+var pendingList = document.querySelector('.pending-list');
+
 (function() {
     var firebaseObject = localStorage.getItem('firebase-object');
 
@@ -5,12 +9,6 @@
 
     firebase.initializeApp(firebaseConfig);
 })();
-
-var context = document.querySelector('.watson-chart').getContext('2d');
-var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
-var submitButton = document.querySelector('.submit-button');
-var approveButton = document.querySelector('.approve-button');
-var pendingList = document.querySelector('.pending-list');
 
 var setBenchmarkValues = function(minArray, targetArray, maxArray) {
     var sliders = document.querySelectorAll('.slider');
@@ -119,6 +117,7 @@ var newChart = function (toneChartObject, toneArray) {
 
 var getWatsonData = function (data, toneChartObject, toneArray) {
     loadingAnimation ();
+    var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
     var watsonUsername = localStorage.getItem('watson-username');
     var watsonPassword = localStorage.getItem('watson-password');
     return $.ajax(
