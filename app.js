@@ -147,8 +147,8 @@ var showTwitterText = function (text) {
         e.preventDefault();
         tweetsModal.classList.remove('hidden');
         modalBackdrop.classList.remove('hidden');
-        tweetsModal.classList.add('display-block');
-        modalBackdrop.classList.add('display-block');
+        tweetsModal.classList.add('display-flex');
+        modalBackdrop.classList.add('display-flex');
         var tweets = { tweet: text };
         ref.push(tweets);
     });
@@ -156,8 +156,8 @@ var showTwitterText = function (text) {
     var closeModal = function () {
         tweetsModal.classList.add('hidden');
         modalBackdrop.classList.add('hidden');
-        tweetsModal.classList.remove('display-block');
-        modalBackdrop.classList.remove('display-block');
+        tweetsModal.classList.remove('display-flex');
+        modalBackdrop.classList.remove('display-flex');
     };
 
     var clickOnBackdrop = function () {
@@ -172,8 +172,8 @@ var showTwitterText = function (text) {
     var gotData = function (data) {       
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
-        for (var property in tweets) {
-            var tweet = tweets[property]['tweet'];
+        for (var tweetID in tweets) {
+            var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('p');
             tweetText.textContent = tweet;
         

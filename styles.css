@@ -202,8 +202,8 @@ body {
     background: rgba(0, 0, 0, 0.5)
 }
 
-.display-block {
-    display: block;
+.display-flex {
+    display: flex;
 }
 
 @media (min-width: 768px) {
