@@ -12,6 +12,7 @@ html, body {
 }
 
 body {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,6 +134,31 @@ body {
     color: rgb(111, 218, 226)
 }
 
+.button {
+    background-color: rgba(85, 166, 172, 0.836);
+    cursor: pointer;
+    color: white;
+    width: 8em;
+    height: 3em;
+    border-radius: .9em;
+    margin-top: .4em;
+}
+
+.approve-button {
+    width: 8.5em;
+    height: 3.5em;
+   
+}
+
+.modal-approval-button {
+    border-radius: 0.9em;
+    height: 1.4em;
+    width: 5em;
+    background-color: rgba(85, 166, 172, 0.836);
+    color: black;
+    text-align: center;
+}
+
 .dark-outline {
 	text-shadow:
 		-1px -1px 0 rgba(85, 166, 172, 0.836),
@@ -166,7 +192,10 @@ body {
     width: 20em;
     height: 20em;
     overflow-y: auto;
-    background: white;
+    background-color: rgb(249, 252, 252);
+    color: black;
+    border-radius: 0.5em;
+    padding: 0.5em;
 }
 
 .spacer {
@@ -190,6 +219,21 @@ body {
     height: 1em;
 }
 
+.modal-backdrop {
+    position: fixed;
+    display: none;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
 .approvals-modal {
     position: relative;
     display: flex;
@@ -199,26 +243,21 @@ body {
 
 .tweets-modal {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.9em;
 }
 
 .close-button {
     font-size: 5em;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -1em;
+    right: -1em;
 }
 
 .pointer {
     cursor: pointer;
-}
-
-.modal-backdrop {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5)
 }
 
 .display-flex {
