@@ -22,7 +22,7 @@ var setBenchmarkValues = function (minArray, targetArray, maxArray) {
         targetArray[k] = (handleValues[1]);
         maxArray[k] = (handleValues[2]);
     }
-}
+};
 
 var loadingAnimation = function () {
     var loadingText = document.querySelector('.loading-text');
@@ -190,8 +190,9 @@ var showTwitterText = function (tweets) {
     var gotData = function (data) {
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
-        clearModal(listOfTweets)
-        for (var tweetID in tweets) {
+        var tweetArray = Object.keys(tweets);
+        clearModal(listOfTweets);
+        tweetArray.forEach(function (tweetID) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('div');
             tweetText.textContent = tweet;
@@ -205,17 +206,8 @@ var showTwitterText = function (tweets) {
             checkmark.classList.add('hidden', 'blue', 'dark-outline')
 
             var modalApprovalButton = document.createElement('button');
-            modalApprovalButton.classList.add('pointer', 'button');
+            modalApprovalButton.classList.add('pointer', 'modal-approval-button');
             modalApprovalButton.textContent = 'Approve';
-            modalApprovalButton.addEventListener('click', function () {
-                tweetLi.classList.add('approved');
-                modalApprovalButton.classList.add('hidden');
-                setTimeout(function () {
-                    checkmark.classList.remove('hidden');
-                    copyButton.classList.remove('hidden');
-                    copyButton.classList.add('display-flex');
-                }, 1000);
-            });
 
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
@@ -238,22 +230,19 @@ var showTwitterText = function (tweets) {
 
             var copyButton = document.createElement('button');
             copyButton.textContent = 'Copy';
-            copyButton.classList.add('hidden', 'pointer');
+            copyButton.classList.add('hidden', 'pointer', 'modal-approval-button');
             // copyButton.addEventListener('click', function () {
             //     copyToClipboard(tweetText)
-            // tweetLi.remove();
-            // ref.child(tweetID).remove();
-            // });
+            //     tweetLi.remove();
+            //     ref.child(tweetID).remove();
+            //     });
+            
 
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
             trashIcon.classList.add('pointer');
             trashIcon.classList.add('trash-icon');
-            trashIcon.addEventListener('click', function () {
-                tweetLi.remove();
-                ref.child(tweetID).remove();
-            });
-
+           
             listItemContents.appendChild(tweetText);
             listItemContents.appendChild(modalApprovalButton);
             listItemContents.appendChild(checkmark);
@@ -264,10 +253,28 @@ var showTwitterText = function (tweets) {
             var tweetLi = document.createElement('li');
             tweetLi.classList.add('tweet-li')
             tweetLi.appendChild(listItemContents)
-            listOfTweets.appendChild(tweetLi);
-        }
-    };
+            listOfTweets.appendChild(tweetLi);   
 
+            console.log(tweetLi);
+            trashIcon.addEventListener('click', function() {
+                console.log(tweetLi);
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+            });
+
+            modalApprovalButton.addEventListener('click', function () {
+                console.log(tweetLi);
+                tweetLi.classList.add('approved');
+                modalApprovalButton.classList.add('hidden');
+                setTimeout(function () {
+                    checkmark.classList.remove('hidden');
+                    copyButton.classList.remove('hidden');
+                    copyButton.classList.add('display-flex');
+                    }, 1000);
+            });
+        });
+    };  
+    
     var errData = function (err) {
         console.log('Error');
         console.log(err);
