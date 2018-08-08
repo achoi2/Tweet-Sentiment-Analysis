@@ -10,7 +10,8 @@
 
 ## Hannah talks about chart.js and noUISlider here
 
-We needed a second API for our project, so we decided to go with firebase. The firebase API will easily allow our users to store and share data in real time. 
+##Firebase
+We needed a way to store tweets so that others can view what has been submitted. We decided to use the firebase API. The firebase API will easily allow our users to store and share data in real time. 
 
 When the user is satisfied with the analysis of their tweet, they can then store their tweet. By pressing the “Tweet Approved” button, the user’s tweet gets sent to firebase. 
 
