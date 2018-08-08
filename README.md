@@ -1,15 +1,13 @@
 # Tonely - Tweet Sentiment Analysis
 
-##Who is our user?
+## Who is our user?
 
-##What is their problem?
+## What is their problem?
 
-##What does our app do to solve that problem for the user?
+## What does our app do to solve that problem for the user?
 
-##Sara talks about styling and WatsonIBM here
+## Sara talks about styling and WatsonIBM here
 
-##Hannah talks about chart.js and noUISlider here
+## Hannah talks about chart.js and noUISlider here
 
-##Andrew talks about Firebase here
-
-##Overall Synopsis of the project
+## Andrew talks about Firebase here
