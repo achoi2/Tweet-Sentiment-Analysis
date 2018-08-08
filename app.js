@@ -133,8 +133,6 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 } 
 
 var showTwitterText = function (text) {
-    var approveButton = document.querySelector('.approve-button');
-    var twitterText = document.querySelector('.tweet-submission');
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
     var closeButton = document.querySelector('.close-button')      
@@ -142,16 +140,12 @@ var showTwitterText = function (text) {
     var database = firebase.database();
     var ref = database.ref('tweets');
 
-    twitterText.textContent = text;
-    approveButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        tweetsModal.classList.remove('hidden');
-        modalBackdrop.classList.remove('hidden');
-        tweetsModal.classList.add('display-flex');
-        modalBackdrop.classList.add('display-flex');
-        var tweets = { tweet: text };
-        ref.push(tweets);
-    });
+    tweetsModal.classList.remove('hidden');
+    modalBackdrop.classList.remove('hidden');
+    tweetsModal.classList.add('display-flex');
+    modalBackdrop.classList.add('display-flex');
+    var tweets = { tweet: text };
+    ref.push(tweets);
 
     var closeModal = function () {
         tweetsModal.classList.add('hidden');
@@ -169,9 +163,17 @@ var showTwitterText = function (text) {
     modalBackdrop.addEventListener('click', clickOnBackdrop);
     closeButton.addEventListener('click', closeModal);
 
+    var clearModal = function (clearList) {
+        while (clearList.hasChildNodes()) {
+            clearList.removeChild(clearList.lastChild);
+            console.log(clearList);
+        }
+    }
+
     var gotData = function (data) {       
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
+        clearModal(listOfTweets)
         for (var tweetID in tweets) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('p');
@@ -225,12 +227,20 @@ var handleSubmit = function () {
     event.preventDefault();
     var textValue = document.querySelector('.textarea').value;
     var data = {"text": textValue};
-    showTwitterText(textValue)
     getWatsonData(data, toneChartObject, toneArray);
+    var twitterText = document.querySelector('.tweet-submission');
+    twitterText.textContent = textValue;
     $('.all-sliders').addClass('hidden');
 }
 
+var handleApprove = function(event) {
+    event.preventDefault();
+    var textValue = document.querySelector('.textarea').value;
+    showTwitterText(textValue);
+}
+
 submitButton.addEventListener('click', handleSubmit);
+approveButton.addEventListener('click', handleApprove);
 
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
