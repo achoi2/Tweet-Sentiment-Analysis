@@ -1,4 +1,11 @@
-firebase.initializeApp(firebaseConfig);
+(function() {
+    var firebaseObject = localStorage.getItem('firebase-object');
+
+    var firebaseConfig = JSON.parse(firebaseObject);
+
+    firebase.initializeApp(firebaseConfig);
+})();
+
 var context = document.querySelector('.watson-chart').getContext('2d');
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
@@ -111,6 +118,8 @@ var newChart = function (toneChartObject, toneArray) {
 
 var getWatsonData = function (data, toneChartObject, toneArray) {
     loadingAnimation ();
+    var watsonUsername = localStorage.getItem('watson-username');
+    var watsonPassword = localStorage.getItem('watson-password');
     return $.ajax(
         { url: watsonUrl, 
         data: data, 
