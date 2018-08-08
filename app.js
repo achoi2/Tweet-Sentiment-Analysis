@@ -1,14 +1,7 @@
 (function() {
-    var firebaseApiKey = localStorage.getItem('firebase-api-key');
+    var firebaseObject = localStorage.getItem('firebase-object');
 
-    var firebaseConfig = {
-        apiKey: firebaseApiKey,
-        authDomain: 'tonely-818ab.firebaseapp.com',
-        databaseURL: 'https://tonely-818ab.firebaseio.com',
-        projectId: 'tonely-818ab',
-        storageBucket: 'tonely-818ab.appspot.com',
-        messagingSenderId: '845746318728'
-    }
+    var firebaseConfig = JSON.parse(firebaseObject);
 
     firebase.initializeApp(firebaseConfig);
 })();
