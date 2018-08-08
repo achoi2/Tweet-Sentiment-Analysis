@@ -158,22 +158,48 @@ body {
     display: none;
 }
 
+.tweet-list {
+    list-style-type: none;
+    width: 20em;
+    height: 20em;
+    overflow-y: auto;
+    background: white;
+}
+
+.trash-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.approvals-modal {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tweets-modal {
+    position: relative;
+}
+
+.close-button {
+    font-size: 5em;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
 .modal-backdrop {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5)
-}
-
-.tweets-modal {
-    position: fixed;
-    z-index: 200;
-    top: 40%;
-    left: 40%;
-    width: 20%;
-    background: white;
 }
 
 .display-block {

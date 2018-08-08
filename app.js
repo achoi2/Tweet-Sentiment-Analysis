@@ -137,6 +137,7 @@ var showTwitterText = function (text) {
     var twitterText = document.querySelector('.tweet-submission');
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
+    var closeButton = document.querySelector('.close-button')      
 
     var database = firebase.database();
     var ref = database.ref('tweets');
@@ -152,23 +153,54 @@ var showTwitterText = function (text) {
         ref.push(tweets);
     });
 
+    var closeModal = function () {
+        tweetsModal.classList.add('hidden');
+        modalBackdrop.classList.add('hidden');
+        tweetsModal.classList.remove('display-block');
+        modalBackdrop.classList.remove('display-block');
+    };
+
+    var clickOnBackdrop = function () {
+        if (event.target === modalBackdrop) {
+            closeModal();
+        }
+    }
+
+    modalBackdrop.addEventListener('click', clickOnBackdrop);
+    closeButton.addEventListener('click', closeModal);
 
     var gotData = function (data) {       
         var tweets = data.val();
-        var listOfTweets = document.querySelector(".listOfTweets")      
-        for (var tweetID in tweets) {
-            var tweetList = tweets[tweetID]['tweet'];
-            var tweetLi = document.createElement('li')
-            tweetLi.textContent = tweetList
-                 
-            listOfTweets.appendChild(tweetLi)
-            tweetLi.addEventListener('click', function(e) {
-                
+        var listOfTweets = document.querySelector(".tweet-list")
+        for (var property in tweets) {
+            var tweet = tweets[property]['tweet'];
+            var tweetText = document.createElement('p');
+            tweetText.textContent = tweet;
+        
+            var approvalButton = document.createElement('button');
+            approvalButton.textContent = 'Approve';
+            
+            var listItemContents = document.createElement('div');
+            
+            var trashIcon = document.createElement('img');
+            trashIcon.setAttribute('src', 'trash-icon.png')
+            trashIcon.classList.add('trash-icon');
+
+              
+            listItemContents.appendChild(tweetText);
+            listItemContents.appendChild(approvalButton);
+            listItemContents.appendChild(trashIcon);
+
+            var tweetLi = document.createElement('li');
+            tweetLi.appendChild(listItemContents)
+            listOfTweets.appendChild(tweetLi);
+
+            trashIcon.addEventListener('click', function() {
                 tweetLi.remove();
                 ref.child(tweetID).remove()
-            });
+            }); 
         }
-    }
+    };  
     
     var errData = function (err) {
         console.log('Error');
