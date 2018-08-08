@@ -175,7 +175,6 @@ var showTwitterText = function (text) {
     var clearModal = function (clearList) {
         while (clearList.hasChildNodes()) {
             clearList.removeChild(clearList.lastChild);
-            console.log(clearList);
         }
     }
 
@@ -204,30 +203,29 @@ var showTwitterText = function (text) {
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
 
-            // var copyToClipboard = function (container) {
-            //     if (document.selection) { 
-            //         var range = document.body.createTextRange();
-            //         range.moveToElementText(container);
-            //         range.select().createTextRange();
-            //         document.execCommand("copy"); 
-                
-            //     } else if (window.getSelection) {
-            //         var range = document.createRange();
-            //         range.selectNode(container);
-            //         window.getSelection().addRange(range);
-            //         document.execCommand("copy");
-            //         alert("You have copied the tweet: " + tweet); 
-            //     }
-            // };
+            var copyToClipboard = function () {
+                var tweetInput = document.createElement('textarea');
+                tweetInput.setAttribute('value', tweet);
+                tweetInput.textContent = tweet;
+
+                listItemContents.appendChild(tweetInput);
+
+                var selection = document.getSelection();
+                var range = document.createRange();
+                range.selectNode(tweetInput);
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                document.execCommand('copy');
+                selection.removeAllRanges();
+
+                tweetInput.parentNode.removeChild(tweetInput);
+                alert('You have copied the tweet: ' + tweetInput.value);
+            };
 
             var copyButton = document.createElement('button');
             copyButton.textContent = 'Copy';
             copyButton.classList.add('hidden', 'pointer', 'modal-approval-button');
-            // copyButton.addEventListener('click', function () {
-            //     copyToClipboard(tweetText)
-            //     tweetLi.remove();
-            //     ref.child(tweetID).remove();
-            //     });
             
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
@@ -246,15 +244,12 @@ var showTwitterText = function (text) {
             tweetLi.appendChild(listItemContents)
             listOfTweets.appendChild(tweetLi);   
 
-            console.log(tweetLi);
             trashIcon.addEventListener('click', function() {
-                console.log(tweetLi);
                 tweetLi.remove();
                 ref.child(tweetID).remove();
             });
 
             modalApprovalButton.addEventListener('click', function () {
-                console.log(tweetLi);
                 tweetLi.classList.add('approved');
                 modalApprovalButton.classList.add('hidden');
                 setTimeout(function () {
@@ -262,6 +257,12 @@ var showTwitterText = function (text) {
                     copyButton.classList.remove('hidden');
                     copyButton.classList.add('display-flex');
                     }, 1000);
+            
+            copyButton.addEventListener('click', function () {
+                copyToClipboard()
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+                });
             });
         });
     };  
