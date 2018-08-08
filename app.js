@@ -22,7 +22,7 @@ var setBenchmarkValues = function(minArray, targetArray, maxArray) {
         targetArray[k] = (handleValues[1]);
         maxArray[k] = (handleValues[2]);
     }
-}
+};
 
 var loadingAnimation = function () {
     var loadingText = document.querySelector('.loading-text');
@@ -197,7 +197,7 @@ var showTwitterText = function (text) {
             checkmark.classList.add('hidden', 'blue', 'dark-outline')
         
             var modalApprovalButton = document.createElement('button');
-            modalApprovalButton.classList.add('pointer', 'button');
+            modalApprovalButton.classList.add('pointer', 'modal-approval-button');
             modalApprovalButton.textContent = 'Approve';
             modalApprovalButton.addEventListener('click', function () {
                 tweetLi.classList.add('approved');
@@ -230,7 +230,7 @@ var showTwitterText = function (text) {
 
             var copyButton = document.createElement('button');
             copyButton.textContent = 'Copy';
-            copyButton.classList.add('hidden', 'pointer');
+            copyButton.classList.add('hidden', 'pointer', 'modal-approval-button');
             // copyButton.addEventListener('click', function () {
             //     copyToClipboard(tweetText)
                 // tweetLi.remove();
