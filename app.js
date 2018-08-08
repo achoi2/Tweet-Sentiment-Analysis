@@ -115,7 +115,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
         { url: watsonUrl, 
         data: data, 
         headers: { 
-            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword), 'Access-Control-Allow-Headers': 'Authorization' },
+            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
         success: function(watsonData) {
             var toneObject = watsonData.document_tone.tones 
             for (var i = 0; i < toneObject.length; i++) {
@@ -136,33 +136,70 @@ var showTwitterText = function (text) {
     var approveButton = document.querySelector('.approve-button');
     var twitterText = document.querySelector('.tweet-submission');
     var tweetsModal = document.querySelector('.tweets-modal');
-    var modalBackdrop = document.querySelector('.modal-backdrop')
+    var modalBackdrop = document.querySelector('.modal-backdrop');
+    var closeButton = document.querySelector('.close-button')      
 
     var database = firebase.database();
-    var ref = database.ref('tweets')
+    var ref = database.ref('tweets');
 
     twitterText.textContent = text;
     approveButton.addEventListener('click', function (e) {
         e.preventDefault();
         tweetsModal.classList.remove('hidden');
         modalBackdrop.classList.remove('hidden');
-        tweetsModal.classList.add('display-block');
-        modalBackdrop.classList.add('display-block');
-        var tweets = { tweet: text }
+        tweetsModal.classList.add('display-flex');
+        modalBackdrop.classList.add('display-flex');
+        var tweets = { tweet: text };
         ref.push(tweets);
     });
 
-    var gotData = function (data) {
-        var tweets = data.val();
-        var listOfTweets = document.querySelector(".listOfTweets")
-        for (var property in tweets) {
-            var tweetList = tweets[property]['tweet']
-            var tweetLi = document.createElement('li')
-            tweetLi.textContent = tweetList
+    var closeModal = function () {
+        tweetsModal.classList.add('hidden');
+        modalBackdrop.classList.add('hidden');
+        tweetsModal.classList.remove('display-flex');
+        modalBackdrop.classList.remove('display-flex');
+    };
 
-            listOfTweets.appendChild(tweetLi)
+    var clickOnBackdrop = function () {
+        if (event.target === modalBackdrop) {
+            closeModal();
         }
     }
+
+    modalBackdrop.addEventListener('click', clickOnBackdrop);
+    closeButton.addEventListener('click', closeModal);
+
+    var gotData = function (data) {       
+        var tweets = data.val();
+        var listOfTweets = document.querySelector(".tweet-list")
+        for (var tweetID in tweets) {
+            var tweet = tweets[tweetID]['tweet'];
+            var tweetText = document.createElement('p');
+            tweetText.textContent = tweet;
+        
+            var approvalButton = document.createElement('button');
+            approvalButton.textContent = 'Approve';
+            
+            var listItemContents = document.createElement('div');
+            
+            var trashIcon = document.createElement('img');
+            trashIcon.setAttribute('src', 'trash-icon.png')
+            trashIcon.classList.add('trash-icon');
+              
+            listItemContents.appendChild(tweetText);
+            listItemContents.appendChild(approvalButton);
+            listItemContents.appendChild(trashIcon);
+
+            var tweetLi = document.createElement('li');
+            tweetLi.appendChild(listItemContents)
+            listOfTweets.appendChild(tweetLi);
+
+            trashIcon.addEventListener('click', function() {
+                tweetLi.remove();
+                ref.child(tweetID).remove()
+            }); 
+        }
+    };  
     
     var errData = function (err) {
         console.log('Error');
@@ -171,6 +208,8 @@ var showTwitterText = function (text) {
     
     ref.on('value', gotData, errData); 
 };
+
+
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
