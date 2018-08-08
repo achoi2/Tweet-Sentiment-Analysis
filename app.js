@@ -176,19 +176,37 @@ var showTwitterText = function (text) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('p');
             tweetText.textContent = tweet;
+
+            var spacer = document.createElement('span');
+            spacer.classList.add('spacer');
+
+            var checkmark = document.createElement('p');
+            checkmark.textContent = '\u2611';
+            checkmark.classList.add('hidden', 'blue', 'dark-outline')
         
-            var approvalButton = document.createElement('button');
-            approvalButton.classList.add('pointer');
-            approvalButton.textContent = 'Approve';
-            approvalButton.addEventListener('click', function () {
-                console.log('success');
-                tweetLi.classList.add('green');
-                copyButton.classList.remove('hidden');
-                copyButton.classList.add('display-flex');
+            var modalApprovalButton = document.createElement('button');
+            modalApprovalButton.classList.add('pointer', 'button');
+            modalApprovalButton.textContent = 'Approve';
+            modalApprovalButton.addEventListener('click', function () {
+                tweetLi.classList.add('approved');
+                modalApprovalButton.classList.add('hidden');
+                setTimeout(function () {
+                    checkmark.classList.remove('hidden');
+                    copyButton.classList.remove('hidden');
+                    copyButton.classList.add('display-flex');
+                    }, 1000);
                 });
 
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
+
+            var copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('hidden');
+            copyButton.addEventListener('click', function () {
+                tweetText.select();
+                document.execCommand('copy');
+            })
 
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
@@ -198,15 +216,13 @@ var showTwitterText = function (text) {
                 tweetLi.remove();
                 ref.child(tweetID).remove();
                 }); 
-
-            var copyButton = document.createElement('button');
-            copyButton.textContent = 'Copy';
-            copyButton.classList.add('hidden');
               
             listItemContents.appendChild(tweetText);
-            listItemContents.appendChild(approvalButton);
+            listItemContents.appendChild(modalApprovalButton);
+            listItemContents.appendChild(checkmark);
+            listItemContents.appendChild(spacer);
+            listItemContents.appendChild(copyButton);
             listItemContents.appendChild(trashIcon);
-            listItemContents.appendChild(copyButton)
 
             var tweetLi = document.createElement('li');
             tweetLi.classList.add('tweet-li')
@@ -222,8 +238,6 @@ var showTwitterText = function (text) {
     
     ref.on('value', gotData, errData); 
 };
-
-
 
 var handleSubmit = function () {
     var toneChartObject = {Analytical: 0,
