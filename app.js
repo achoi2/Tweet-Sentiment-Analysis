@@ -10,6 +10,7 @@ var context = document.querySelector('.watson-chart').getContext('2d');
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
 var approveButton = document.querySelector('.approve-button');
+var pendingList = document.querySelector('.pending-list');
 
 var setBenchmarkValues = function(minArray, targetArray, maxArray) {
     var sliders = document.querySelectorAll('.slider');
@@ -142,9 +143,10 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 } 
 
 var showTwitterText = function (text) {
+    var buttonPushed = event.currentTarget;
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
-    var closeButton = document.querySelector('.close-button')      
+    var closeButton = document.querySelector('.close-button');  
 
     var database = firebase.database();
     var ref = database.ref('tweets');
@@ -154,7 +156,10 @@ var showTwitterText = function (text) {
     tweetsModal.classList.add('display-flex');
     modalBackdrop.classList.add('display-flex');
     var tweets = { tweet: text };
-    ref.push(tweets);
+
+    var pushToFirebase = function() {
+        ref.push(tweets);
+    }
 
     var closeModal = function () {
         tweetsModal.classList.add('hidden');
@@ -175,11 +180,10 @@ var showTwitterText = function (text) {
     var clearModal = function (clearList) {
         while (clearList.hasChildNodes()) {
             clearList.removeChild(clearList.lastChild);
-            console.log(clearList);
         }
     }
 
-    var gotData = function (data) {       
+    var gotData = function (data) {   
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
         clearModal(listOfTweets)
@@ -264,8 +268,10 @@ var showTwitterText = function (text) {
         console.log('Error');
         console.log(err);
     }
-    
-    ref.on('value', gotData, errData); 
+    if (buttonPushed.nodeName == "BUTTON") {
+        pushToFirebase();
+    }
+    ref.on('value', gotData, errData);
 };
 
 var handleSubmit = function () {
@@ -296,6 +302,7 @@ var handleApprove = function(event) {
 
 submitButton.addEventListener('click', handleSubmit);
 approveButton.addEventListener('click', handleApprove);
+pendingList.addEventListener('click', handleApprove);
 
 var createSliders = function() {
     var sliders = document.querySelectorAll('.slider');
