@@ -1,4 +1,18 @@
-firebase.initializeApp(firebaseConfig);
+(function() {
+    var firebaseApiKey = localStorage.getItem('firebase-api-key');
+
+    var firebaseConfig = {
+        apiKey: firebaseApiKey,
+        authDomain: 'tonely-818ab.firebaseapp.com',
+        databaseURL: 'https://tonely-818ab.firebaseio.com',
+        projectId: 'tonely-818ab',
+        storageBucket: 'tonely-818ab.appspot.com',
+        messagingSenderId: '845746318728'
+    }
+
+    firebase.initializeApp(firebaseConfig);
+})();
+
 var context = document.querySelector('.watson-chart').getContext('2d');
 var watsonUrl = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2018-06-11';
 var submitButton = document.querySelector('.submit-button');
@@ -111,6 +125,8 @@ var newChart = function (toneChartObject, toneArray) {
 
 var getWatsonData = function (data, toneChartObject, toneArray) {
     loadingAnimation ();
+    var watsonUsername = localStorage.getItem('watson-username');
+    var watsonPassword = localStorage.getItem('watson-password');
     return $.ajax(
         { url: watsonUrl, 
         data: data, 
