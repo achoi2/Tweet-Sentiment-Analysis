@@ -185,7 +185,6 @@ var showTwitterText = function (text) {
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
             trashIcon.classList.add('trash-icon');
-
               
             listItemContents.appendChild(tweetText);
             listItemContents.appendChild(approvalButton);
