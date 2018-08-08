@@ -48,7 +48,7 @@ var newChart = function (toneChartObject, toneArray) {
     var maxArray = [0, 0, 0, 0, 0, 0, 0];
     setBenchmarkValues(minArray, targetArray, maxArray);
     var toneValuesArray = Object.values(toneChartObject);
-        new Chart(context, {
+    new Chart(context, {
         type: 'bar',
         data: {
             datasets: [{
@@ -56,7 +56,7 @@ var newChart = function (toneChartObject, toneArray) {
                 data: toneValuesArray,
                 backgroundColor: 'rgb(65, 193, 244, 0.5)',
                 borderColor: 'rgb(65, 193, 244, 0.5)'
-                }, {
+            }, {
                 label: 'Minimum Approval Score',
                 data: minArray,
                 // Changes this dataset to become a line
@@ -67,17 +67,17 @@ var newChart = function (toneChartObject, toneArray) {
                 showLine: false,
                 pointStyle: 'rect',
                 borderWidth: 2.5
-                }, {
+            }, {
                 label: 'Target Approval Score',
                 data: targetArray,
                 type: 'line',
-                fill: false, 
+                fill: false,
                 backgroundColor: 'rgb(54, 216, 36)',
                 borderColor: 'rgb(54, 216, 36)',
                 showLine: false,
-                pointStyle: 'rect', 
+                pointStyle: 'rect',
                 borderWidth: 2.5
-                }, {
+            }, {
                 label: 'Maximum Approval Score',
                 data: maxArray,
                 type: 'line',
@@ -87,18 +87,18 @@ var newChart = function (toneChartObject, toneArray) {
                 showLine: false,
                 pointStyle: 'rect',
                 borderWidth: 2.5
-                }],
+            }],
             labels: toneArray
         },
         options: {
-            beginatZero: true, 
+            beginatZero: true,
             scales: {
                 yAxes: [{
                     id: 'y-axis-1',
-                    type: 'linear', 
-                    position: 'left', 
+                    type: 'linear',
+                    position: 'left',
                     ticks: {
-                        min: 0, 
+                        min: 0,
                         max: 1.1
                     },
                     gridLines: {
@@ -121,32 +121,40 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
     var watsonUsername = localStorage.getItem('watson-username');
     var watsonPassword = localStorage.getItem('watson-password');
     return $.ajax(
-        { url: watsonUrl, 
-        data: data, 
-        headers: { 
-            "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword) },
-        success: function(watsonData) {
-            var toneObject = watsonData.document_tone.tones 
-            for (var i = 0; i < toneObject.length; i++) {
-                var watsonToneName = toneObject[i].tone_name
-                for (var j = 0; j < toneArray.length; j++) {
-                    var toneName = toneArray[j]
-                    if (watsonToneName === toneName) {
-                        toneChartObject[toneName] = toneObject[i].score;
+        {
+            url: watsonUrl,
+            data: data,
+            headers: {
+                "Authorization": "Basic " + btoa(watsonUsername + ":" + watsonPassword)
+            },
+            success: function (watsonData) {
+                var toneObject = watsonData.document_tone.tones
+                for (var i = 0; i < toneObject.length; i++) {
+                    var watsonToneName = toneObject[i].tone_name
+                    for (var j = 0; j < toneArray.length; j++) {
+                        var toneName = toneArray[j]
+                        if (watsonToneName === toneName) {
+                            toneChartObject[toneName] = toneObject[i].score;
+                        }
                     }
-                } 
-            } 
-            setTimeout(function() {newChart(toneChartObject, toneArray)}, 3300);
-        }
-    });     
-} 
+                }
+                setTimeout(function () { newChart(toneChartObject, toneArray) }, 3300);
+            }
+        });
+}
 
-var showTwitterText = function (text) {
+var handleApprove = function (e) {
+    e.preventDefault();
+    var textValue = document.querySelector('.textarea').value;
+    var tweets = { tweet: textValue };
+    showTwitterText(tweets)
+}
+
+var showTwitterText = function (tweets) {
     var buttonPushed = event.currentTarget;
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
-    var closeButton = document.querySelector('.close-button');  
-
+    var closeButton = document.querySelector('.close-button')
     var database = firebase.database();
     var ref = database.ref('tweets');
 
@@ -185,32 +193,24 @@ var showTwitterText = function (text) {
     var gotData = function (data) {   
         var tweets = data.val();
         var listOfTweets = document.querySelector(".tweet-list")
-        clearModal(listOfTweets)
-        for (var tweetID in tweets) {
+        var tweetArray = Object.keys(tweets);
+        clearModal(listOfTweets);
+        tweetArray.forEach(function (tweetID) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('div');
             tweetText.textContent = tweet;
             tweetText.classList.add('tweet-div');
-           
+
             var spacer = document.createElement('span');
             spacer.classList.add('spacer');
 
             var checkmark = document.createElement('p');
             checkmark.textContent = '\u2611';
             checkmark.classList.add('hidden', 'blue', 'dark-outline')
-        
+
             var modalApprovalButton = document.createElement('button');
             modalApprovalButton.classList.add('pointer', 'modal-approval-button');
             modalApprovalButton.textContent = 'Approve';
-            modalApprovalButton.addEventListener('click', function () {
-                tweetLi.classList.add('approved');
-                modalApprovalButton.classList.add('hidden');
-                setTimeout(function () {
-                    checkmark.classList.remove('hidden');
-                    copyButton.classList.remove('hidden');
-                    copyButton.classList.add('display-flex');
-                    }, 1000);
-                });
 
             var listItemContents = document.createElement('div');
             listItemContents.classList.add('list-item-contents');
@@ -221,7 +221,7 @@ var showTwitterText = function (text) {
             //         range.moveToElementText(container);
             //         range.select().createTextRange();
             //         document.execCommand("copy"); 
-                
+
             //     } else if (window.getSelection) {
             //         var range = document.createRange();
             //         range.selectNode(container);
@@ -236,19 +236,16 @@ var showTwitterText = function (text) {
             copyButton.classList.add('hidden', 'pointer', 'modal-approval-button');
             // copyButton.addEventListener('click', function () {
             //     copyToClipboard(tweetText)
-                // tweetLi.remove();
-                // ref.child(tweetID).remove();
-                // });
+            //     tweetLi.remove();
+            //     ref.child(tweetID).remove();
+            //     });
             
+
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
             trashIcon.classList.add('pointer');
             trashIcon.classList.add('trash-icon');
-            trashIcon.addEventListener('click', function() {
-                tweetLi.remove();
-                ref.child(tweetID).remove();
-                }); 
-              
+           
             listItemContents.appendChild(tweetText);
             listItemContents.appendChild(modalApprovalButton);
             listItemContents.appendChild(checkmark);
@@ -260,13 +257,32 @@ var showTwitterText = function (text) {
             tweetLi.classList.add('tweet-li')
             tweetLi.appendChild(listItemContents)
             listOfTweets.appendChild(tweetLi);   
-        }
+
+            console.log(tweetLi);
+            trashIcon.addEventListener('click', function() {
+                console.log(tweetLi);
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+            });
+
+            modalApprovalButton.addEventListener('click', function () {
+                console.log(tweetLi);
+                tweetLi.classList.add('approved');
+                modalApprovalButton.classList.add('hidden');
+                setTimeout(function () {
+                    checkmark.classList.remove('hidden');
+                    copyButton.classList.remove('hidden');
+                    copyButton.classList.add('display-flex');
+                    }, 1000);
+            });
+        });
     };  
     
     var errData = function (err) {
         console.log('Error');
         console.log(err);
     }
+    
     if (buttonPushed.nodeName == "BUTTON") {
         pushToFirebase();
     }
@@ -274,52 +290,48 @@ var showTwitterText = function (text) {
 };
 
 var handleSubmit = function () {
-    var toneChartObject = {Analytical: 0,
+    var toneChartObject = {
+        Analytical: 0,
         Anger: 0,
         Confident: 0,
         Fear: 0,
         Joy: 0,
         Sadness: 0,
         Tentative: 0
-        };
-    
+    };
+
     var toneArray = ['Analytical', 'Anger', 'Confident', 'Fear', 'Joy', 'Sadness', 'Tentative'];
     event.preventDefault();
     var textValue = document.querySelector('.textarea').value;
-    var data = {"text": textValue};
+    var data = { "text": textValue };
     getWatsonData(data, toneChartObject, toneArray);
     var twitterText = document.querySelector('.tweet-submission');
     twitterText.textContent = textValue;
     $('.all-sliders').addClass('hidden');
 }
 
-var handleApprove = function(event) {
-    event.preventDefault();
-    var textValue = document.querySelector('.textarea').value;
-    showTwitterText(textValue);
-}
 
 submitButton.addEventListener('click', handleSubmit);
 approveButton.addEventListener('click', handleApprove);
 pendingList.addEventListener('click', handleApprove);
 
-var createSliders = function() {
+var createSliders = function () {
     var sliders = document.querySelectorAll('.slider');
 
     var createSlider = function createSlider(slider) {
         noUiSlider.create(slider, {
-            start: [ 0.1, 0.5, 0.9 ],
+            start: [0.1, 0.5, 0.9],
             connect: [false, true, true, false],
             step: 0.1,
             range: {
-                'min': [  0 ],
-                'max': [ 1 ]
+                'min': [0],
+                'max': [1]
             }
         });
     }
 
     var addOnUpdate = function addOnUpdate(slider) {
-        slider.noUiSlider.on('update', function() {
+        slider.noUiSlider.on('update', function () {
             var sliderName = slider.getAttribute('class');
             sliderName = sliderName.split(" ");
             var sliderMin = "." + sliderName[0] + "-min";
