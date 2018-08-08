@@ -178,26 +178,40 @@ var showTwitterText = function (text) {
             tweetText.textContent = tweet;
         
             var approvalButton = document.createElement('button');
+            approvalButton.classList.add('pointer');
             approvalButton.textContent = 'Approve';
-            
+            approvalButton.addEventListener('click', function () {
+                console.log('success');
+                tweetLi.classList.add('green');
+                copyButton.classList.remove('hidden');
+                copyButton.classList.add('display-flex');
+                });
+
             var listItemContents = document.createElement('div');
-            
+            listItemContents.classList.add('list-item-contents');
+
             var trashIcon = document.createElement('img');
             trashIcon.setAttribute('src', 'trash-icon.png')
+            trashIcon.classList.add('pointer');
             trashIcon.classList.add('trash-icon');
+            trashIcon.addEventListener('click', function() {
+                tweetLi.remove();
+                ref.child(tweetID).remove();
+                }); 
+
+            var copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.classList.add('hidden');
               
             listItemContents.appendChild(tweetText);
             listItemContents.appendChild(approvalButton);
             listItemContents.appendChild(trashIcon);
+            listItemContents.appendChild(copyButton)
 
             var tweetLi = document.createElement('li');
+            tweetLi.classList.add('tweet-li')
             tweetLi.appendChild(listItemContents)
-            listOfTweets.appendChild(tweetLi);
-
-            trashIcon.addEventListener('click', function() {
-                tweetLi.remove();
-                ref.child(tweetID).remove()
-            }); 
+            listOfTweets.appendChild(tweetLi);   
         }
     };  
     
