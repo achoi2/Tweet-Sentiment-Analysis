@@ -142,6 +142,7 @@ var getWatsonData = function (data, toneChartObject, toneArray) {
 } 
 
 var showTwitterText = function (text) {
+    var body = document.querySelector('.body');
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
     var closeButton = document.querySelector('.close-button')      
@@ -161,6 +162,7 @@ var showTwitterText = function (text) {
         modalBackdrop.classList.add('hidden');
         tweetsModal.classList.remove('display-flex');
         modalBackdrop.classList.remove('display-flex');
+        body.classList.remove('overflow-hidden');
     };
 
     var clickOnBackdrop = function () {
@@ -183,6 +185,7 @@ var showTwitterText = function (text) {
         var listOfTweets = document.querySelector(".tweet-list")
         var tweetArray = Object.keys(tweets);
         clearModal(listOfTweets);
+        body.classList.add('overflow-hidden');
         tweetArray.forEach(function (tweetID) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('div');
