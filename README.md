@@ -6,9 +6,9 @@ https://achoi2.github.io/Tweet-Sentiment-Analysis/
 
 ##Contributors
 --------------
-Andrew Choi
-Hannah Glasser
-Sara Muntean
+* Andrew Choi
+* Hannah Glasser
+* Sara Muntean
 
 ## Who is our user?
 -------------------
