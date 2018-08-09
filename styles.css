@@ -234,6 +234,10 @@ body {
     z-index: 10;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .approvals-modal {
     position: relative;
     display: flex;
