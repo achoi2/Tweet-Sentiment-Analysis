@@ -4,6 +4,12 @@ Tonely is a web application designed to analyze tone percentages of draft tweets
 
 https://achoi2.github.io/Tweet-Sentiment-Analysis/
 
+##Contributors
+--------------
+Andrew Choi
+Hannah Glasser
+Sara Muntean
+
 ## Who is our user?
 -------------------
 Brand support teams who want to conscientiously engage with customers through Twitter. 
