@@ -150,7 +150,9 @@ var handleApprove = function (e) {
     showTwitterText(tweets)
 }
 
-var showTwitterText = function (tweets) {
+
+var showTwitterText = function (text) {
+    var body = document.querySelector('.body');
     var buttonPushed = event.currentTarget;
     var tweetsModal = document.querySelector('.tweets-modal');
     var modalBackdrop = document.querySelector('.modal-backdrop');
@@ -172,6 +174,7 @@ var showTwitterText = function (tweets) {
         modalBackdrop.classList.add('hidden');
         tweetsModal.classList.remove('display-flex');
         modalBackdrop.classList.remove('display-flex');
+        body.classList.remove('overflow-hidden');
     };
 
     var clickOnBackdrop = function () {
@@ -194,6 +197,7 @@ var showTwitterText = function (tweets) {
         var listOfTweets = document.querySelector(".tweet-list")
         var tweetArray = Object.keys(tweets);
         clearModal(listOfTweets);
+        body.classList.add('overflow-hidden');
         tweetArray.forEach(function (tweetID) {
             var tweet = tweets[tweetID]['tweet'];
             var tweetText = document.createElement('div');
