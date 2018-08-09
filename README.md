@@ -133,7 +133,7 @@ var copyToClipboard = function () {
 ```
 
 ## Libraries
-============
+------------
 In order to effectively display the data we received from IBM Watson's tone analyzer, we needed to utilize some libraries. One of the hardest and most frustrating parts of this project was in simply just deciding on which libraries to use. There are so many available options, and the challenge was to pick a library that could do what you needed it to, while also being easy to integrate into the project and unlikely to interfere with any other functionality. The two main libraries we landed on were Chart.js and noUiSlider.
 
 ### noUiSlider
