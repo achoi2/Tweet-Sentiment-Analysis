@@ -21,7 +21,8 @@ Before we displayed the data we got back from IBM Watson, we wanted to give the 
 ------------
 Chart.js was utilized in this project to display the data from IBM Watson on a graph that also showed the benchmarks set by the user. The graph creation was a relatively smooth process, and we did not have to tweak much in regards to the styling or the responsiveness. The biggest lesson we learned with this library was to make sure to fully read through the documentaiton and understand the limitations of the code before trying to create something. We had a vision in mind, but after many attempts to make it happen and a thorough review of the library - we realized what we wanted wasn't exactly an option with Chart.js. We went back to the drawing board armed with a better understanding of what we could accomplish. The final product had the exact functionality we wanted, but with some slight style adjustments that matched the newly adjusted goal.
 
-#Firebase
+### Firebase
+------------
 We needed a way to store tweets so that others can view what has been submitted. For this we decided to use the firebase API.The firebase API will easily allow our users to store and share data in real time. 
 
 When the user is satisfied with the analysis of their tweet, they can then store their tweet. By pressing the “Tweet Approved” button, the user’s tweet gets sent to firebase. 
