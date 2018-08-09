@@ -166,7 +166,7 @@ var showTwitterText = function (text) {
     modalBackdrop.classList.add('display-flex');
 
     var pushToFirebase = function() {
-        ref.push(tweets);
+        ref.push(text);
     }
 
     var closeModal = function () {
