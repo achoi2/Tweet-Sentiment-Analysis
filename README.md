@@ -21,4 +21,19 @@ Before we displayed the data we got back from IBM Watson, we wanted to give the 
 ------------
 Chart.js was utilized in this project to display the data from IBM Watson on a graph that also showed the benchmarks set by the user. The graph creation was a relatively smooth process, and we did not have to tweak much in regards to the styling or the responsiveness. The biggest lesson we learned with this library was to make sure to fully read through the documentaiton and understand the limitations of the code before trying to create something. We had a vision in mind, but after many attempts to make it happen and a thorough review of the library - we realized what we wanted wasn't exactly an option with Chart.js. We went back to the drawing board armed with a better understanding of what we could accomplish. The final product had the exact functionality we wanted, but with some slight style adjustments that matched the newly adjusted goal.
 
-## Andrew talks about Firebase here
+#Firebase
+We needed a way to store tweets so that others can view what has been submitted. For this we decided to use the firebase API.The firebase API will easily allow our users to store and share data in real time. 
+
+When the user is satisfied with the analysis of their tweet, they can then store their tweet. By pressing the “Tweet Approved” button, the user’s tweet gets sent to firebase. 
+
+
+![](readme_pic/firebase_one.png)
+
+
+Once the button has been pressed, a modal will pop up. Next, the user will get back the tweets that have been sent to firebase, and can see it in the modal. By showing the tweets that have been submitted, someone else can view the tweets and review it. 
+
+
+![](readme_pic/firebase_two.png)
+
+
+One of the challenges that we faced with firebase was when we pressed the "Submit for Analysis" button. When pressed, a tweet would get entered into firebase. We only wanted the tweet to get entered if the "Tweet Approved" button was clicked. We were able to fix this problem by refactoring our code and making use of more functions.
