@@ -1,9 +1,9 @@
 # Tonely - Tweet Sentiment Analysis
-===================================
+-------------------
 Tonely is a web application designed to analyze tone percentages of draft tweets so that companies can establish a consistent tone amongst all customer service representatives. It also provides an approval service so that tweets may not be sumitted to Twitter unless they have been approved by a second member of the team.
 
 ## Who is our user?
-===================
+-------------------
 Brand support teams who want to conscientiously engage with customers through Twitter. 
 
 ### Brand Managers
@@ -15,22 +15,22 @@ Brand managers can establish benchmark tone ranges that all draft tweets must fa
 Customer Support Representatives can input draft tweets to be analyzed through IBM Watson's Tone Analyzer to see if tones fall within the benchmark ranges established by the brand managers.
 
 ## What is their problem?
-=========================
+-------------------
 Without Tonely, customer support representatives are able to tweet poorly worded posts and responses that may cause backlash. With Tonely, there are built in checks to ensure these problems do not arise, because tweets must fall within the benchmark ranges or be approved by a second party. 
 
 ## IBM Watson
-==============
+-------------------
 
 ### Tone Analysis
 -----------------
 IBM Watson's built in Tone Analyzer delivers a tone score ranging from 0-1 of each of the following tones:
-⋅⋅* Anger
-⋅⋅* Fear
-⋅⋅* Joy
-⋅⋅* Sadness
-⋅⋅* Analytical
-⋅⋅* Confident
-⋅⋅* Tentative
+1. Anger
+2. Fear
+3. Joy
+4. Sadness
+5. Analytical
+6. Confident
+7. Tentative
 
 The higher the score, the stronger the tone is preceived.
 
@@ -47,11 +47,12 @@ To make the request to the server, we had to use the following header on our aja
 However, even with authorization from IBM Watson, Google Chrome still would not allow access to the requested data. In order to get around this, an Google Chrome Extension, "Allow-Control-Allow-Origin" that allowed us to see the data we received from our ajax request.
 
 ## Styling
-==========
+----------
 The overall styling for our site had a common theme: 
-⋅⋅* Clean
-⋅⋅* Mobile responsive
-⋅⋅* Intuitive
+⋅⋅* 
+1. Clean
+2. Mobile responsive
+3. Intuitive
 
 We utilized varying opacities of the same tone to create a harmonious appearance, seamlessly blending the various components of the site for a more pleasant user experience. By using multiple, reusable classes on various elements in our HTML, we were able to efficiently and clearly modify our styles. 
 
@@ -62,18 +63,18 @@ We utilized varying opacities of the same tone to create a harmonious appearance
 ----------------------
 Getting the loading animation visuals to stagger themselves as they appeared on the screen was a challenge. Initially, all letters appeared on the screen after the same delay. In order to fix that, we had to scale the setTimeout function by a set amount of time withing our loop, seen below:
 
-`var doSetTimeout = function (j) {
+````var doSetTimeout = function (j) {
     setTimeout(function () {
         var letter = letters[j];
         letter.classList.remove('loading-letter')
         letter.classList.add('show');
-    }, i * 400);`
+    }, i * 400);```
 
 #### Mobile Responsivity 
 ------------------------
 By using media queries, we were able to scale the main div and our graph of our site to be responsive on multiple screen sizes.  We kept our media queries as simple as possible, adding to a seamless look as users shifted sizes. 
 
-`@media (min-width: 768px) {
+```@media (min-width: 768px) {
     .graph {
     width: 30em;
     }
@@ -89,7 +90,7 @@ By using media queries, we were able to scale the main div and our graph of our 
     .header {
         min-width: 50em;
     }
-}`
+}```
 
 #### Modal Styling
 ------------------
@@ -103,7 +104,7 @@ That led us to, on clicking of the copy bottom, create an input box, fill it wit
 
 The code can be seen below:
 
-`var copyToClipboard = function () {
+```var copyToClipboard = function () {
     var tweetInput = document.createElement('textarea');
     tweetInput.setAttribute('value', tweet);
     tweetInput.textContent = tweet;
@@ -121,7 +122,7 @@ The code can be seen below:
 
     tweetInput.parentNode.removeChild(tweetInput);
     alert('You have copied the tweet: ' + tweetInput.value);
-};`
+};```
 
 ## Hannah talks about chart.js and noUISlider here
 
