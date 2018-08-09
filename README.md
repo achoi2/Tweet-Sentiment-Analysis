@@ -4,13 +4,19 @@ Tonely is a web application designed to analyze tone percentages of draft tweets
 
 https://achoi2.github.io/Tweet-Sentiment-Analysis/
 
+## Contributors
+--------------
+* Andrew Choi
+* Hannah Glasser
+* Sara Muntean
+
 ## Who is our user?
 -------------------
 Brand support teams who want to conscientiously engage with customers through Twitter. 
 
 ### Brand Managers
 ------------------
-Brand managers can establish benchmark tone ranges that all draft tweets must fall within, so that customer service members know the requirements for each tweet. Brand managers can also ensure that 
+Brand managers can establish benchmark tone ranges that all draft tweets must fall within, so that customer service members know the requirements for each tweet. Brand managers can also ensure that all tweets have been approved by a second party prior to their submission to Twitter.
 
 ### Customer Support Representatives
 ------------------------------------
@@ -133,12 +139,12 @@ var copyToClipboard = function () {
 ```
 
 ## Libraries
-============
+------------
 In order to effectively display the data we received from IBM Watson's tone analyzer, we needed to utilize some libraries. One of the hardest and most frustrating parts of this project was in simply just deciding on which libraries to use. There are so many available options, and the challenge was to pick a library that could do what you needed it to, while also being easy to integrate into the project and unlikely to interfere with any other functionality. The two main libraries we landed on were Chart.js and noUiSlider.
 
 ### noUiSlider
 --------------
-Before we displayed the data we got back from IBM Watson, we wanted to give the user a chance to set boundaries in order to capture the appropriate tone in their drafted tweet. The boundaries would include a minimum, target, and maximum value for each of the seven tones. In order to avoid crowding the screen with a bunch of input boxes, or shuffling the user through each tone individually, we needed a way to display all seven tone ranges simultaneously. Range sliders ended up being the best option - and we were able to use the noUiSlider library to quickly style them and allow for three handles. The trickiest part of this process was testing out two other libraries prior to settling on noUiSlider, only to realize that I was having the same issues that countless other users had experienced and the github repos were no longer being updated or maintained for those libraries. 
+Before we displayed the data we got back from IBM Watson, we wanted to give the user a chance to set boundaries in order to capture the appropriate tone in their drafted tweet. The boundaries would include a minimum, target, and maximum value for each of the seven tones. In order to avoid crowding the screen with a bunch of input boxes, or shuffling the user through each tone individually, we needed a way to display all seven tone ranges simultaneously. Range sliders ended up being the best option - and we were able to use the noUiSlider library to quickly style them and allow for three handles. The trickiest part of this process was testing out two other libraries prior to settling on noUiSlider, only to realize that we were having the same issues that countless other users had experienced and the github repositories were no longer being updated or maintained for those libraries. 
 
 ### Chart.js
 ------------
