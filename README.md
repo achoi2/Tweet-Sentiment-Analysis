@@ -49,7 +49,7 @@ However, even with authorization from IBM Watson, Google Chrome still would not 
 ## Styling
 ----------
 The overall styling for our site had a common theme: 
-⋅⋅* 
+ 
 1. Clean
 2. Mobile responsive
 3. Intuitive
@@ -63,18 +63,21 @@ We utilized varying opacities of the same tone to create a harmonious appearance
 ----------------------
 Getting the loading animation visuals to stagger themselves as they appeared on the screen was a challenge. Initially, all letters appeared on the screen after the same delay. In order to fix that, we had to scale the setTimeout function by a set amount of time withing our loop, seen below:
 
-````var doSetTimeout = function (j) {
+```Javascript
+var doSetTimeout = function (j) {
     setTimeout(function () {
         var letter = letters[j];
         letter.classList.remove('loading-letter')
         letter.classList.add('show');
-    }, i * 400);```
+    }, i * 400);
+```
 
 #### Mobile Responsivity 
 ------------------------
 By using media queries, we were able to scale the main div and our graph of our site to be responsive on multiple screen sizes.  We kept our media queries as simple as possible, adding to a seamless look as users shifted sizes. 
 
-```@media (min-width: 768px) {
+```CSS
+@media (min-width: 768px) {
     .graph {
     width: 30em;
     }
@@ -90,7 +93,8 @@ By using media queries, we were able to scale the main div and our graph of our 
     .header {
         min-width: 50em;
     }
-}```
+}
+```
 
 #### Modal Styling
 ------------------
@@ -104,7 +108,8 @@ That led us to, on clicking of the copy bottom, create an input box, fill it wit
 
 The code can be seen below:
 
-```var copyToClipboard = function () {
+```Javascript
+var copyToClipboard = function () {
     var tweetInput = document.createElement('textarea');
     tweetInput.setAttribute('value', tweet);
     tweetInput.textContent = tweet;
@@ -122,7 +127,8 @@ The code can be seen below:
 
     tweetInput.parentNode.removeChild(tweetInput);
     alert('You have copied the tweet: ' + tweetInput.value);
-};```
+};
+```
 
 ## Hannah talks about chart.js and noUISlider here
 
