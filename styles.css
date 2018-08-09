@@ -252,8 +252,8 @@ body {
 .close-button {
     font-size: 5em;
     position: absolute;
-    top: -1em;
-    right: -1em;
+    top: -.5em;
+    right: -.5em;
 }
 
 .pointer {
