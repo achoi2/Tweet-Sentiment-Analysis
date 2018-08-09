@@ -40,7 +40,7 @@ IBM Watson's built in Tone Analyzer delivers a tone score ranging from 0-1 of ea
 6. Confident
 7. Tentative
 
-The higher the score, the stronger the tone is preceived.
+The higher the score, the stronger the tone is perceived.
 
 ### Issues We Faced
 -------------------
